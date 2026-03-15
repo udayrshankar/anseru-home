@@ -1,51 +1,70 @@
+import dropbox from "../assets/dropbox.png"
+import drive from "../assets/drive.png"
+import teams from "../assets/teams.png"
+import slack from "../assets/slack.png"
+import jira from "../assets/jira.png"
+import circle from "../assets/circle.png"
+
 export default function DealInfrastructure() {
   return (
-    <div className="w-full py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Left content */}
-          <div className="space-y-6">
-            <div className="space-y-2">
-              <p className="text-sm font-medium text-gray-500 uppercase">Building Block</p>
-              <h2 className="text-4xl md:text-5xl font-medium text-black">
-                We are building next generation of
-              </h2>
-              <h3 className="text-4xl md:text-5xl font-bold text-anseru-blue">
-                Deal Infrastructure
-              </h3>
-            </div>
+    <section className="w-full py-40">
+      <div className="mx-auto px-3 text-center relative">
 
-            <p className="text-lg text-gray-600 leading-relaxed max-w-lg">
-              Modern sales, security, and compliance teams need infrastructure that scales with complexity. 
-              Anseru is the foundational layer for deal acceleration.
-            </p>
+        {/* Floating Integration Icons */}
+        <div className="absolute inset-0">
 
-            <button className="bg-anseru-blue text-white px-8 py-3 rounded text-base font-medium hover:opacity-90 transition w-fit">
-              Start Building
-            </button>
-          </div>
+          {/* Dropbox */}
+          <img
+            src={dropbox}
+            className="w-[100px] h-[100px] absolute left-1/2 -translate-x-1/2 -top-24 opacity-90"
+          />
 
-          {/* Right - Syncing animation */}
-          <div className="flex justify-center items-center min-h-80">
-            <div className="relative w-40 h-40">
-              {/* Animated circle */}
-              <div className="absolute inset-0 rounded-full border-4 border-gray-200 border-t-anseru-blue animate-spin"></div>
-              
-              {/* Center circle with icon */}
-              <div className="absolute inset-4 rounded-full bg-white border-4 border-gray-100 flex items-center justify-center shadow-lg">
-                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M30 7.5V52.5M52.5 30H7.5" stroke="#1C32E6" strokeWidth="2" strokeLinecap="round" />
-                  <circle cx="30" cy="30" r="22.5" stroke="#1C32E6" strokeWidth="2" />
-                </svg>
-              </div>
+          {/* Left Top */}
+          <img
+            src={jira}
+            className="w-[100px] h-[100px] absolute left-[25%] top-[1%] opacity-90"
+          />
 
-              <p className="absolute -bottom-12 left-0 right-0 text-center text-sm text-gray-600 font-medium">
-                Syncing data...
-              </p>
-            </div>
-          </div>
+          {/* Left Middle */}
+          <img
+            src={slack}
+            className="w-[100px] h-[100px] absolute left-[10%] top-[30%] opacity-90"
+          />
+
+          {/* Right Top */}
+          <img
+            src={drive}
+            className="w-[100px] h-[100px] absolute right-[25%] top-[1%] opacity-90"
+          />
+
+          {/* Right Middle */}
+          <img
+            src={teams}
+            className="w-[100px] h-[100px] absolute right-[10%] top-[30%] opacity-90"
+          />
+
         </div>
+
+        {/* Center Circle Image */}
+        <div className="flex justify-center">
+          <img
+            src={circle}
+            className="w-31 h-31 object-contain mt-10"
+            alt="center circle"
+          />
+        </div>
+
+        {/* Text */}
+        
+        <p className="text-gray-600 text-lg mb-3">
+          We are building next generation of
+        </p>
+
+        <h2 className="text-5xl font-medium text-black">
+          Deal Infrastructure
+        </h2>
+
       </div>
-    </div>
-  );
+    </section>
+  )
 }
