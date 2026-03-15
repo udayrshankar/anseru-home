@@ -15,6 +15,7 @@ export default function Index() {
     <div className="w-full">
       <Navbar />
       <HeroBanner />
+      <DealInfrastructure />
       <SocialProof />
       <ProblemSection />
       <HowItWorks />
@@ -22,7 +23,6 @@ export default function Index() {
       <TwoAgents />
       <RFPWorkflow />
       <FutureSection />
-      <DealInfrastructure />
       <Footer />
     </div>
   );
