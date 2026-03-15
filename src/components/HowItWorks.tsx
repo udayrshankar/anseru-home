@@ -1,0 +1,69 @@
+import intro from "../assets/Intro Page.png"
+
+export default function HowItWorks() {
+  return (
+    <div className="w-full py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
+          {/* Left side - text content */}
+          <div className="space-y-6">
+            <p className="text-sm font-medium text-gray-500 uppercase">How it Works</p>
+            <h2 className="text-4xl md:text-5xl font-medium text-black">
+              Connect your knowledge
+            </h2>
+            <p className="text-lg text-gray-600 leading-relaxed">
+              Anseru AI offers a centralized hub for all your knowledge sources. Upload previous RFPs, 
+              relevant documents, and Q&A from legacy tools or spreadsheets. Seamlessly integrate with 
+              internal data systems like Google Drive, SharePoint, and more, pull information directly 
+              from your website.
+            </p>
+
+            <div className="space-y-4 pt-4">
+              <div className="flex gap-3">
+                <svg width="28" height="26" viewBox="0 0 28 26" fill="none" className="flex-shrink-0" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14 0L14.1938 11.3187C14.2016 11.774 14.7911 12.0007 15.1434 11.6839L23.8995 3.80761L15.4174 11.9384C15.0762 12.2654 15.3203 12.8129 15.8106 12.8201L28 13L15.8106 13.1799C15.3203 13.1872 15.0762 13.7346 15.4174 14.0617L23.8995 22.1924L15.1434 14.3161C14.7911 13.9993 14.2016 14.226 14.1938 14.6813L14 26L13.8063 14.6813C13.7985 14.226 13.2089 13.9993 12.8567 14.3161L4.1005 22.1924L12.5827 14.0617C12.9239 13.7346 12.6797 13.1872 12.1894 13.1799L0 13L12.1894 12.8201C12.6797 12.8129 12.9239 12.2654 12.5827 11.9384L4.1005 3.80761L12.8567 11.6839C13.2089 12.0007 13.7985 11.774 13.8063 11.3187L14 0Z" fill="#3D3D3D" />
+                </svg>
+                <span className="text-gray-700">Automatically indexes past RFPs, security docs, and content</span>
+              </div>
+              <div className="flex gap-3">
+                <svg width="28" height="26" viewBox="0 0 28 26" fill="none" className="flex-shrink-0" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14 0L14.1938 11.3187C14.2016 11.774 14.7911 12.0007 15.1434 11.6839L23.8995 3.80761L15.4174 11.9384C15.0762 12.2654 15.3203 12.8129 15.8106 12.8201L28 13L15.8106 13.1799C15.3203 13.1872 15.0762 13.7346 15.4174 14.0617L23.8995 22.1924L15.1434 14.3161C14.7911 13.9993 14.2016 14.226 14.1938 14.6813L14 26L13.8063 14.6813C13.7985 14.226 13.2089 13.9993 12.8567 14.3161L4.1005 22.1924L12.5827 14.0617C12.9239 13.7346 12.6797 13.1872 12.1894 13.1799L0 13L12.1894 12.8201C12.6797 12.8129 12.9239 12.2654 12.5827 11.9384L4.1005 3.80761L12.8567 11.6839C13.2089 12.0007 13.7985 11.774 13.8063 11.3187L14 0Z" fill="#3D3D3D" />
+                </svg>
+                <span className="text-gray-700">Keeps responses accurate with up-to-date sources</span>
+              </div>
+              <div className="flex gap-3">
+                <svg width="28" height="26" viewBox="0 0 28 26" fill="none" className="flex-shrink-0" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14 0L14.1938 11.3187C14.2016 11.774 14.7911 12.0007 15.1434 11.6839L23.8995 3.80761L15.4174 11.9384C15.0762 12.2654 15.3203 12.8129 15.8106 12.8201L28 13L15.8106 13.1799C15.3203 13.1872 15.0762 13.7346 15.4174 14.0617L23.8995 22.1924L15.1434 14.3161C14.7911 13.9993 14.2016 14.226 14.1938 14.6813L14 26L13.8063 14.6813C13.7985 14.226 13.2089 13.9993 12.8567 14.3161L4.1005 22.1924L12.5827 14.0617C12.9239 13.7346 12.6797 13.1872 12.1894 13.1799L0 13L12.1894 12.8201C12.6797 12.8129 12.9239 12.2654 12.5827 11.9384L4.1005 3.80761L12.8567 11.6839C13.2089 12.0007 13.7985 11.774 13.8063 11.3187L14 0Z" fill="#3D3D3D" />
+                </svg>
+                <span className="text-gray-700">Improves continuously as teams use the platform</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right side - integration showcase */}
+          <div className="gradient-a3 rounded-lg p-12 text-white min-h-96 flex flex-col justify-between relative overflow-hidden">
+            <div className="absolute inset-0 opacity-20 gradient-a3">
+              <img
+                src="https://api.builder.io/api/v1/image/assets/TEMP/d26bb697857f6dfdecc5fd729678160d30796f2e?width=1114"
+                alt="background"
+                className="w-full h-full object-cover"
+                style={{ mixBlendMode: "overlay" }}
+              />
+            </div>
+            
+            <div className="relative z-10 space-y-4">
+              <p className="text-sm font-medium">Ask. Find. Respond—instantly.</p>
+              <h3 className="text-3xl font-medium">
+                Turn complex RFPs into clear, winning responses
+              </h3>
+            </div>
+
+            <div className="relative translate-y-15 translate-x-15 z-10 space-y-4">
+              <img src={intro} alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
