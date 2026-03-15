@@ -1,43 +1,43 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function TwoAgents() {
   const [activeAgent, setActiveAgent] = useState('sud'); // 'sud' or 'kg'
 
   return (
-    <div className="w-full py-24 bg-white font-sans">
+    <div className="w-full py-16 md:py-24 bg-white font-sans">
       <div className="max-w-[1200px] mx-auto px-6">
         
         {/* Header Section */}
-        <div className="flex justify-between items-end mb-12">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gap-6">
           <div className="space-y-2">
             <p className="text-sm font-medium text-gray-500">Proven Results</p>
-            <h2 className="text-4xl md:text-[44px] tracking-tight font-medium text-black">
+            <h2 className="text-3xl md:text-[44px] tracking-tight font-medium text-black">
               Two Super Agents
             </h2>
           </div>
 
           {/* Toggle Buttons */}
-          <div className="flex bg-[#f4f4f5] rounded-xl p-1 h-12">
+          <div className="flex bg-[#f4f4f5] rounded-xl p-1 h-12 w-full md:w-auto overflow-x-auto whitespace-nowrap scrollbar-hide">
             <button 
               onClick={() => setActiveAgent('sud')}
-              className={`flex items-center gap-2 px-5 py-2 rounded-lg font-medium text-[15px] transition shadow-sm ${
+              className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-2 rounded-lg font-medium text-[15px] transition shadow-sm ${
                 activeAgent === 'sud' ? 'bg-black text-white' : 'text-black hover:bg-gray-200 shadow-none'
               }`}
             >
               Meet KG
-              <div className="flex -space-x-[6px] opacity-90">
+              <div className="flex -space-x-[6px] opacity-90 shrink-0">
                 <div className={`w-[10px] h-[10px] rounded-sm transform rotate-45 ${activeAgent === 'sud' ? 'bg-[#93c5fd]' : 'bg-[#60a5fa]'}`}></div>
                 <div className={`w-[10px] h-[10px] rounded-sm transform rotate-45 mt-[6px] ${activeAgent === 'sud' ? 'bg-[#eab308]' : 'bg-[#ca8a04]'}`}></div>
               </div>
             </button>
             <button 
               onClick={() => setActiveAgent('kg')}
-              className={`flex items-center gap-2 px-5 py-2 rounded-lg font-medium text-[15px] transition ${
+              className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-2 rounded-lg font-medium text-[15px] transition ${
                 activeAgent === 'kg' ? 'bg-black text-white shadow-sm' : 'text-black hover:bg-gray-200'
               }`}
             >
               Meet SUD 
-              <svg width="16" height="16" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-[2px]">
+              <svg width="16" height="16" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-[2px] shrink-0">
                 <path d="M17.4266 14.0744C16.8526 14.6484 15.9217 14.6484 15.3477 14.0744L12.8133 11.5399C12.2392 10.9658 12.2392 10.0351 12.8133 9.46104L15.3477 6.92661C15.9217 6.35253 16.8526 6.35253 17.4266 6.92661L19.9611 9.46103C20.5351 10.0351 20.5351 10.9658 19.9611 11.5399L17.4266 14.0744Z" fill={activeAgent === 'kg' ? "white" : "black"} />
                 <path d="M5.65325 14.0744C5.07918 14.6484 4.14842 14.6484 3.57435 14.0744L1.03993 11.5399C0.465858 10.9658 0.465857 10.0351 1.03993 9.46104L3.57435 6.92661C4.14842 6.35253 5.07918 6.35253 5.65325 6.92661L8.18767 9.46103C8.76174 10.0351 8.76174 10.9658 8.18767 11.5399L5.65325 14.0744Z" fill={activeAgent === 'kg' ? "#a3b800" : "black"} />
                 <path d="M11.54 19.961C10.9658 20.5351 10.0351 20.5351 9.46103 19.961L6.9266 17.4266C6.35254 16.8526 6.35254 15.9217 6.9266 15.3477L9.46103 12.8133C10.0351 12.2392 10.9658 12.2392 11.54 12.8133L14.0744 15.3477C14.6484 15.9217 14.6484 16.8526 14.0744 17.4266L11.54 19.961Z" fill={activeAgent === 'kg' ? "#a3b800" : "black"} />
@@ -48,17 +48,17 @@ export default function TwoAgents() {
         </div>
 
         {/* Main Content Area */}
-        <div className="flex flex-col lg:flex-row items-stretch min-h-[500px] relative">
+        <div className="flex flex-col lg:flex-row items-stretch min-h-[500px] relative gap-4 lg:gap-0">
             
           {/* Vertical Divider Line */}
           <div className="hidden lg:block absolute left-1/2 top-[-20px] bottom-[-20px] w-px bg-gray-300 transform -translate-x-1/2 z-10"></div>
 
           {/* LEFT: Agent Visual */}
-          <div className="lg:w-1/2 lg:pr-14 flex flex-col relative z-20">
+          <div className="lg:w-1/2 lg:pr-14 flex flex-col relative z-20 overflow-hidden rounded-xl lg:rounded-none">
             {activeAgent === 'sud' ? (
               // SUD VISUAL (RFP Agent)
               <div
-                className="relative flex-grow flex flex-col justify-between p-10 overflow-hidden"
+                className="relative flex-grow flex flex-col justify-between p-8 md:p-10 min-h-[400px]"
                 style={{
                   background: "linear-gradient(135deg, #1d36a8 0%, #294ae0 40%, #4369fb 70%, #5880ff 100%)",
                   backgroundSize: "cover",
@@ -74,25 +74,25 @@ export default function TwoAgents() {
 
                 {/* Top Left Diamonds */}
                 <div className="relative pt-4 pl-4">
-                   <div className="relative w-32 h-32">
-                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-14 h-14 bg-white/40 rounded-[10px] rotate-45 backdrop-blur-sm"></div>
-                      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-14 h-14 bg-white/40 rounded-[10px] rotate-45 backdrop-blur-sm"></div>
-                      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-14 h-14 bg-white/40 rounded-[10px] rotate-45 backdrop-blur-sm"></div>
-                      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-14 h-14 bg-white/40 rounded-[10px] rotate-45 backdrop-blur-sm"></div>
+                   <div className="relative w-24 h-24 md:w-32 md:h-32">
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-8 md:w-12 md:h-12 bg-white/40 rounded-[10px] rotate-45 backdrop-blur-sm"></div>
+                      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-8 h-8 md:w-12 md:h-12 bg-white/40 rounded-[10px] rotate-45 backdrop-blur-sm"></div>
+                      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-8 h-8 md:w-12 md:h-12 bg-white/40 rounded-[10px] rotate-45 backdrop-blur-sm"></div>
+                      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-8 md:w-12 md:h-12 bg-white/40 rounded-[10px] rotate-45 backdrop-blur-sm"></div>
                    </div>
                 </div>
 
                 {/* Bottom Details */}
-                <div className="relative mt-auto pt-20">
-                  <h3 className="text-white text-[32px] font-medium tracking-tight mb-5">RFP Agent</h3>
-                  <div className="flex flex-wrap gap-3">
-                    <span className="text-white text-[13px] px-3 py-1.5 rounded-[4px] border border-white/30 bg-white/10 backdrop-blur-sm font-medium">
+                <div className="relative mt-auto pt-10">
+                  <h3 className="text-white text-2xl md:text-[32px] font-medium tracking-tight mb-5">RFP Agent</h3>
+                  <div className="flex flex-wrap gap-2 md:gap-3">
+                    <span className="text-white text-[12px] md:text-[13px] px-3 py-1.5 rounded-[4px] border border-white/30 bg-white/10 backdrop-blur-sm font-medium">
                       80% faster drafting
                     </span>
-                    <span className="text-white text-[13px] px-3 py-1.5 rounded-[4px] border border-white/30 bg-white/10 backdrop-blur-sm font-medium">
+                    <span className="text-white text-[12px] md:text-[13px] px-3 py-1.5 rounded-[4px] border border-white/30 bg-white/10 backdrop-blur-sm font-medium">
                       Understands complex RFPs
                     </span>
-                    <span className="text-white text-[13px] px-3 py-1.5 rounded-[4px] border border-white/30 bg-white/10 backdrop-blur-sm font-medium">
+                    <span className="text-white text-[12px] md:text-[13px] px-3 py-1.5 rounded-[4px] border border-white/30 bg-white/10 backdrop-blur-sm font-medium">
                       Helps sales close deals
                     </span>
                   </div>
@@ -101,9 +101,9 @@ export default function TwoAgents() {
             ) : (
               // KG VISUAL (Security Questionnaire Agent)
               <div
-                className="relative flex-grow flex flex-col justify-between p-10 overflow-hidden"
+                className="relative flex-grow flex flex-col justify-between p-8 md:p-10 min-h-[400px]"
                 style={{
-                  background: "linear-gradient(135deg, #3b5bdb 0%, #6f42c1 40%, #d6336c 70%, #fa5252 100%)", // Matches the uploaded image gradient
+                  background: "linear-gradient(135deg, #3b5bdb 0%, #6f42c1 40%, #d6336c 70%, #fa5252 100%)",
                   backgroundSize: "cover",
                 }}
               >
@@ -115,27 +115,27 @@ export default function TwoAgents() {
                   }}
                 />
 
-                {/* Top Left Shape (Connecting Squares) */}
+                {/* Top Left Shape */}
                 <div className="relative pt-4 pl-4">
-                   <div className="relative w-40 h-40 flex">
-                      <div className="w-[85px] h-[85px] bg-white/40 rounded-[20px] backdrop-blur-sm relative z-10"></div>
-                      <div className="w-[85px] h-[85px] bg-white/40 rounded-[20px] backdrop-blur-sm absolute bottom-0 right-0 z-0"></div>
+                   <div className="relative w-32 h-32 md:w-40 md:h-40 flex">
+                      <div className="w-[60px] h-[60px] md:w-[85px] md:h-[85px] bg-white/40 rounded-[15px] md:rounded-[20px] backdrop-blur-sm relative z-10"></div>
+                      <div className="w-[60px] h-[60px] md:w-[85px] md:h-[85px] bg-white/40 rounded-[15px] md:rounded-[20px] backdrop-blur-sm absolute bottom-0 right-0 z-0"></div>
                    </div>
                 </div>
 
                 {/* Bottom Details */}
-                <div className="relative mt-auto pt-20">
-                  <h3 className="text-white text-[32px] font-medium tracking-tight mb-5 leading-tight">
+                <div className="relative mt-auto pt-10">
+                  <h3 className="text-white text-2xl md:text-[32px] font-medium tracking-tight mb-5 leading-tight">
                     Security<br/>Questionnaire Agent
                   </h3>
-                  <div className="flex flex-wrap gap-3">
-                    <span className="text-white text-[13px] px-3 py-1.5 rounded-[4px] border border-white/30 bg-white/10 backdrop-blur-sm font-medium">
+                  <div className="flex flex-wrap gap-2 md:gap-3">
+                    <span className="text-white text-[12px] md:text-[13px] px-3 py-1.5 rounded-[4px] border border-white/30 bg-white/10 backdrop-blur-sm font-medium">
                       Evidence-backed answers
                     </span>
-                    <span className="text-white text-[13px] px-3 py-1.5 rounded-[4px] border border-white/30 bg-white/10 backdrop-blur-sm font-medium">
+                    <span className="text-white text-[12px] md:text-[13px] px-3 py-1.5 rounded-[4px] border border-white/30 bg-white/10 backdrop-blur-sm font-medium">
                       No contradictions
                     </span>
-                    <span className="text-white text-[13px] px-3 py-1.5 rounded-[4px] border border-white/30 bg-white/10 backdrop-blur-sm font-medium mt-1">
+                    <span className="text-white text-[12px] md:text-[13px] px-3 py-1.5 rounded-[4px] border border-white/30 bg-white/10 backdrop-blur-sm font-medium">
                       Compliance-ready
                     </span>
                   </div>
@@ -146,14 +146,14 @@ export default function TwoAgents() {
 
           {/* RIGHT: Stats Grid */}
           <div className="lg:w-1/2 lg:pl-4 flex flex-col relative z-0">
-             <div className="flex-grow grid grid-cols-2 grid-rows-2">
+             <div className="flex-grow grid grid-cols-1 sm:grid-cols-2 lg:grid-rows-2">
                 
                 {/* Top Left */}
-                <div className="bg-[#f4f4f5] p-8 pb-10 flex flex-col justify-between border-r border-b border-gray-200">
-                    <h4 className="text-[22px] font-medium text-black leading-[1.2] tracking-tight">
+                <div className="bg-[#f4f4f5] p-6 md:p-8 flex flex-col justify-between border-b sm:border-r lg:border-r border-gray-200 min-h-[220px]">
+                    <h4 className="text-xl md:text-[22px] font-medium text-black leading-[1.2] tracking-tight">
                         {activeAgent === 'sud' ? "Instant, deal-ready\nfirst drafts" : "95%+ response\naccuracy"}
                     </h4>
-                    <div className="mt-16">
+                    <div className="mt-8">
                       {activeAgent === 'kg' && <h5 className="text-[14px] text-black font-medium mb-1">Evidence-Backed Responses</h5>}
                       <p className="text-[13px] text-gray-600 font-medium">
                           {activeAgent === 'sud' 
@@ -164,16 +164,11 @@ export default function TwoAgents() {
                 </div>
 
                 {/* Top Right */}
-                <div className="bg-[#f4f4f5] p-8 pb-10 flex flex-col justify-between border-b border-gray-200 relative">
-                     {/* Horizontal extend lines for design */}
-                    <div className="absolute top-1/4 -right-10 w-10 h-px bg-gray-200 hidden lg:block"></div>
-                    <div className="absolute top-1/2 -right-10 w-10 h-px bg-gray-200 hidden lg:block"></div>
-                    <div className="absolute top-3/4 -right-10 w-10 h-px bg-gray-200 hidden lg:block"></div>
-
-                    <h4 className="text-[22px] font-medium text-black leading-[1.2] tracking-tight">
+                <div className="bg-[#f4f4f5] p-6 md:p-8 flex flex-col justify-between border-b border-gray-200 relative min-h-[220px]">
+                    <h4 className="text-xl md:text-[22px] font-medium text-black leading-[1.2] tracking-tight">
                         {activeAgent === 'sud' ? "80% reduction in\ndrafting time" : "70-90% faster\nsecurity reviews"}
                     </h4>
-                    <div className="mt-16 pr-4">
+                    <div className="mt-8 pr-4">
                       {activeAgent === 'kg' && <h5 className="text-[14px] text-black font-medium mb-1">Faster Security Reviews</h5>}
                       <p className="text-[13px] text-gray-600 font-medium">
                           {activeAgent === 'sud' 
@@ -184,15 +179,11 @@ export default function TwoAgents() {
                 </div>
 
                 {/* Bottom Left */}
-                <div className="bg-[#f4f4f5] p-8 pb-10 flex flex-col justify-between border-r border-gray-200 relative">
-                    {/* Vertical extend lines for design */}
-                    <div className="absolute bottom-[-20px] left-1/4 w-px h-5 bg-gray-200 hidden lg:block"></div>
-                    <div className="absolute bottom-[-20px] right-1/4 w-px h-5 bg-gray-200 hidden lg:block"></div>
-
-                    <h4 className="text-[22px] font-medium text-black leading-[1.2] tracking-tight">
+                <div className="bg-[#f4f4f5] p-6 md:p-8 flex flex-col justify-between border-b sm:border-b-0 sm:border-r lg:border-r border-gray-200 relative min-h-[220px]">
+                    <h4 className="text-xl md:text-[22px] font-medium text-black leading-[1.2] tracking-tight">
                         {activeAgent === 'sud' ? "Human review\nwhere it matters" : "100% audit-ready\nanswers"}
                     </h4>
-                    <div className="mt-16">
+                    <div className="mt-8">
                       {activeAgent === 'kg' && <h5 className="text-[14px] text-black font-medium mb-1">Always Current & Audit-Ready</h5>}
                       <p className="text-[13px] text-gray-600 font-medium">
                           {activeAgent === 'sud' 
@@ -202,14 +193,11 @@ export default function TwoAgents() {
                     </div>
                 </div>
 
-                {/* Bottom Right - Empty space with button */}
-                <div className="bg-[#f4f4f5] p-8 pb-10 flex flex-col justify-end items-end relative">
-                     <div className="absolute bottom-[-20px] left-1/4 w-px h-5 bg-gray-200 hidden lg:block"></div>
-                     <div className="absolute top-1/4 -right-10 w-10 h-px bg-gray-200 hidden lg:block"></div>
-
+                {/* Bottom Right */}
+                <div className="bg-[#f4f4f5] p-6 md:p-8 flex flex-col justify-center items-center sm:items-end relative min-h-[220px]">
                     <button 
                       onClick={() => setActiveAgent(activeAgent === 'sud' ? 'kg' : 'sud')}
-                      className="flex items-center gap-2 bg-black text-white text-[13px] font-medium px-4 py-2.5 rounded-lg hover:bg-gray-800 transition shadow-sm"
+                      className="w-full sm:w-auto flex items-center justify-center gap-2 bg-black text-white text-[13px] font-medium px-6 py-3 rounded-lg hover:bg-gray-800 transition shadow-sm"
                     >
                         {activeAgent === 'sud' ? "Meet KG" : "Meet SUD"}
                         {activeAgent === 'sud' ? (

@@ -15,43 +15,43 @@ export default function Integrations() {
   const col2 = [highspot, slack, gong];
   const col3 = [hubspot, zendesk, notion, teams];
 
-  const Card = ({ logo }) => (
-    <div className="w-[110px] h-[110px] bg-gray-100 rounded-2xl border border-gray-200 flex items-center justify-center shadow-sm">
+  const Card = ({ logo }: { logo: string }) => (
+    <div className="w-[80px] h-[80px] md:w-[110px] md:h-[110px] bg-white rounded-xl md:rounded-2xl border border-gray-100 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
       <img
         src={logo}
         alt="integration logo"
-        className="w-10 h-10 object-contain"
+        className="w-8 h-8 md:w-10 md:h-10 object-contain"
       />
     </div>
   );
 
   return (
-    <section className="py-10">
+    <section className="py-16 md:py-24 bg-white">
 
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-24 items-center">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row gap-12 md:gap-24 items-center">
 
         {/* FRAME CONTAINER */}
-        <div className="w-[420px] h-[420px] bg-white rounded-3xl overflow-hidden flex items-center justify-center">
+        <div className="w-full max-w-[420px] aspect-square bg-gray-50 rounded-3xl overflow-hidden flex items-center justify-center p-6 md:p-0">
 
           {/* LOGO GRID */}
-          <div className="flex gap-2">
+          <div className="flex gap-2 md:gap-3">
 
             {/* Column 1 */}
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 md:gap-3">
               {col1.map((logo, i) => (
                 <Card key={i} logo={logo} />
               ))}
             </div>
 
             {/* Column 2 */}
-            <div className="flex flex-col gap-2 mt-20">
+            <div className="flex flex-col gap-2 md:gap-3 mt-10 md:mt-20">
               {col2.map((logo, i) => (
                 <Card key={i} logo={logo} />
               ))}
             </div>
 
             {/* Column 3 */}
-            <div className="flex flex-col gap-2 mt-10">
+            <div className="flex flex-col gap-2 md:gap-3 mt-5 md:mt-10">
               {col3.map((logo, i) => (
                 <Card key={i} logo={logo} />
               ))}
@@ -62,15 +62,18 @@ export default function Integrations() {
         </div>
 
         {/* TEXT SECTION */}
-        <div>
-          <p className="text-gray-500 mb-4 text-sm">
+        <div className="text-center md:text-left flex-1">
+          <p className="text-gray-500 mb-4 text-sm font-medium uppercase tracking-wider">
             Integrations
           </p>
 
-          <h2 className="text-[36px] font-medium text-gray-900 leading-[1]">
-            Connect to the Tools <br />
+          <h2 className="text-3xl md:text-[44px] font-medium text-gray-900 leading-tight tracking-tight">
+            Connect to the Tools <br className="hidden md:block" />
             You Already Use
           </h2>
+          <p className="mt-6 text-gray-600 text-base md:text-lg leading-relaxed max-w-md mx-auto md:mx-0">
+            Anseru syncs effortlessly with your existing stack, pulling knowledge from where it lives and pushing answers where they're needed.
+          </p>
         </div>
 
       </div>

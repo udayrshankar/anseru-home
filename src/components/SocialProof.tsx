@@ -8,20 +8,20 @@ export default function SocialProof() {
   ];
 
   return (
-    <div className="w-full py-20 bg-white border-t border-gray-200">
+    <div className="w-full py-16 md:py-20 bg-white border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Scroll container */}
+        <p className="text-center text-gray-400 text-sm font-medium uppercase tracking-widest mb-10">Trusted by Teams at</p>
         <div className="overflow-hidden">
-          <div className="flex gap-6 items-center justify-center flex-wrap">
+          <div className="flex gap-4 md:gap-8 items-center justify-center flex-wrap">
             {logos.map((logo, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 flex items-center justify-center h-24 px-8 border border-gray-300 rounded-lg bg-gray-50 hover:bg-white transition"
+                className="flex-shrink-0 flex items-center justify-center h-16 md:h-24 px-6 md:px-10 border border-gray-200 rounded-xl bg-gray-50 hover:bg-white hover:shadow-sm transition duration-300"
               >
                 <img
                   src={logo.src}
                   alt={logo.name}
-                  className="max-h-12 max-w-[150px] object-contain"
+                  className="max-h-8 md:max-h-12 max-w-[120px] md:max-w-[150px] object-contain opacity-70 hover:opacity-100 transition"
                 />
               </div>
             ))}

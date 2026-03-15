@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function Features() {
   const [hoveredIndex, setHoveredIndex] = useState(-1);
@@ -50,7 +50,7 @@ export default function Features() {
       ),
     },
     {
-      title: "Evidence & Citation\nEngine",
+      title: "Evidence & Citation engine",
       description: "Every response is backed by\ntrusted sources.",
       blueHex: "#1C36E4",
       iconPos: "top-right",
@@ -100,24 +100,24 @@ export default function Features() {
   );
 
   return (
-    <div className="w-full py-20 bg-white font-sans">
+    <div className="w-full py-16 md:py-24 bg-white font-sans">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-start mb-12 md:mb-16 gap-6 md:gap-8">
           <div className="space-y-3">
-            <p className="text-[15px] font-medium text-gray-500">Platform Features</p>
-            <h2 className="text-4xl md:text-5xl font-medium text-gray-900 leading-[1.15] tracking-tight">
-              Powerful Capabilities for<br />Modern Deal Teams
+            <p className="text-[14px] md:text-[15px] font-medium text-gray-500">Platform Features</p>
+            <h2 className="text-3xl md:text-5xl font-medium text-gray-900 leading-tight tracking-tight">
+              Powerful Capabilities for<br className="hidden md:block" /> Modern Deal Teams
             </h2>
           </div>
-          <p className="text-lg text-gray-600 max-w-md leading-relaxed">
+          <p className="text-base md:text-lg text-gray-600 max-w-md leading-relaxed">
             Centralize knowledge, generate accurate responses,
             and collaborate seamlessly across teams.
           </p>
         </div>
 
-        {/* Feature Cards Grid (Flex for transition) */}
-        <div className="flex flex-col lg:flex-row gap-4 h-auto lg:h-[480px]">
+        {/* Feature Cards Grid */}
+        <div className="flex flex-col lg:flex-row gap-4">
           {features.map((feature, index) => {
             const isHovered = hoveredIndex === index;
 
@@ -126,121 +126,89 @@ export default function Features() {
                 key={index}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(-1)}
-                className="relative bg-[#f8f9fa] flex flex-col transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] overflow-hidden w-full cursor-pointer"
+                className={`relative bg-[#f8f9fa] flex flex-col transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] overflow-hidden w-full cursor-pointer lg:h-[480px] ${isHovered ? 'min-h-[400px] lg:min-h-0' : 'min-h-[200px] lg:min-h-0'}`}
                 style={{
                   flex: hoveredIndex === -1 ? 1 : isHovered ? 2.8 : 0.85,
                 }}
               >
-                {/* Content Block depending on text position */}
-                {feature.textPos === "top" ? (
-                  <>
-                    <div className="p-8 pb-4 flex-grow flex flex-col">
-                      <h3 className="text-[24px] font-medium text-gray-900 mb-3 whitespace-pre-line leading-tight">
-                        {feature.title}
-                      </h3>
-                      <p className="text-[15px] text-gray-500 leading-relaxed whitespace-pre-line">
-                        {feature.description}
-                      </p>
+                {/* Content Block */}
+                <div className="flex flex-col flex-grow h-full">
+                  {feature.textPos === "top" ? (
+                    <>
+                      <div className="p-6 md:p-8 flex-grow">
+                        <h3 className="text-xl md:text-[24px] font-medium text-gray-900 mb-3 whitespace-pre-line leading-tight">
+                          {feature.title}
+                        </h3>
+                        <p className="text-sm md:text-[15px] text-gray-500 leading-relaxed whitespace-pre-line">
+                          {feature.description}
+                        </p>
 
-                      {/* Animated List */}
-                      <div className={`grid transition-all duration-500 ease-in-out ${isHovered ? "grid-rows-[1fr] mt-6 opacity-100" : "grid-rows-[0fr] mt-0 opacity-0"}`}>
-                        <div className="overflow-hidden">
-                          <ul className="flex flex-col gap-4 pb-2">
-                            {feature.bullets.map((bullet, i) => (
-                              <li key={i} className="flex items-start gap-3">
-                                <AsteriskIcon />
-                                <span className="text-[15px] text-gray-600 leading-snug">{bullet}</span>
-                              </li>
-                            ))}
-                          </ul>
+                        {/* Animated List */}
+                        <div className={`grid transition-all duration-500 ease-in-out ${isHovered ? "grid-rows-[1fr] mt-6 opacity-100" : "grid-rows-[0fr] mt-0 opacity-0"}`}>
+                          <div className="overflow-hidden">
+                            <ul className="flex flex-col gap-4 pb-4">
+                              {feature.bullets.map((bullet, i) => (
+                                <li key={i} className="flex items-start gap-3">
+                                  <AsteriskIcon />
+                                  <span className="text-sm md:text-[15px] text-gray-600 leading-snug">{bullet}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    
-                    <div className="h-[104px] flex w-full shrink-0">
-                      {feature.iconPos === "bottom-left" ? (
-                        <>
-                          <div
-                            className="w-[104px] h-[104px] flex items-center justify-center shrink-0"
-                            style={{ backgroundColor: feature.blueHex }}
-                          >
-                            <svg width="66" height="66" viewBox="0 0 66 66" fill="none">
-                              {feature.iconSvg}
-                            </svg>
-                          </div>
-                          <div className="flex-grow h-full" style={stripedStyle}></div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="flex-grow h-full" style={stripedStyle}></div>
-                          <div
-                            className="w-[104px] h-[104px] flex items-center justify-center shrink-0"
-                            style={{ backgroundColor: feature.blueHex }}
-                          >
-                            <svg width="66" height="66" viewBox="0 0 66 66" fill="none">
-                              {feature.iconSvg}
-                            </svg>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="h-[104px] flex w-full shrink-0">
-                      {feature.iconPos === "top-left" ? (
-                        <>
-                          <div
-                            className="w-[104px] h-[104px] flex items-center justify-center shrink-0"
-                            style={{ backgroundColor: feature.blueHex }}
-                          >
-                            <svg width="66" height="66" viewBox="0 0 66 66" fill="none">
-                              {feature.iconSvg}
-                            </svg>
-                          </div>
-                          <div className="flex-grow h-full" style={stripedStyle}></div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="flex-grow h-full" style={stripedStyle}></div>
-                          <div
-                            className="w-[104px] h-[104px] flex items-center justify-center shrink-0"
-                            style={{ backgroundColor: feature.blueHex }}
-                          >
-                            <svg width="66" height="66" viewBox="0 0 66 66" fill="none">
-                              {feature.iconSvg}
-                            </svg>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                    
-                    <div className="flex-grow" />
-                    
-                    <div className="p-8 pt-4 flex flex-col justify-end">
-                      <h3 className="text-[24px] font-medium text-gray-900 mb-3 whitespace-pre-line leading-tight shrink-0">
-                        {feature.title}
-                      </h3>
-                      <p className="text-[15px] text-gray-500 leading-relaxed whitespace-pre-line shrink-0">
-                        {feature.description}
-                      </p>
-
-                      {/* Animated List */}
-                      <div className={`grid transition-all duration-500 ease-in-out ${isHovered ? "grid-rows-[1fr] mt-6 opacity-100" : "grid-rows-[0fr] mt-0 opacity-0"}`}>
-                        <div className="overflow-hidden">
-                          <ul className="flex flex-col gap-4 pb-2">
-                            {feature.bullets.map((bullet, i) => (
-                              <li key={i} className="flex items-start gap-3">
-                                <AsteriskIcon />
-                                <span className="text-[15px] text-gray-600 leading-snug">{bullet}</span>
-                              </li>
-                            ))}
-                          </ul>
+                      
+                      <div className="h-20 md:h-[104px] flex w-full shrink-0 mt-auto">
+                        <div className={`flex-grow h-full ${feature.iconPos === "bottom-left" ? "order-2" : "order-1"}`} style={stripedStyle}></div>
+                        <div
+                          className={`w-20 md:w-[104px] h-20 md:h-[104px] flex items-center justify-center shrink-0 ${feature.iconPos === "bottom-left" ? "order-1" : "order-2"}`}
+                          style={{ backgroundColor: feature.blueHex }}
+                        >
+                          <svg width="40" height="40" viewBox="0 0 66 66" fill="none" className="w-10 h-10 md:w-auto md:h-auto">
+                            {feature.iconSvg}
+                          </svg>
                         </div>
                       </div>
-                    </div>
-                  </>
-                )}
+                    </>
+                  ) : (
+                    <>
+                      <div className="h-20 md:h-[104px] flex w-full shrink-0">
+                        <div
+                          className={`w-20 md:w-[104px] h-20 md:h-[104px] flex items-center justify-center shrink-0 ${feature.iconPos === "top-left" ? "order-1" : "order-2"}`}
+                          style={{ backgroundColor: feature.blueHex }}
+                        >
+                          <svg width="40" height="40" viewBox="0 0 66 66" fill="none" className="w-10 h-10 md:w-auto md:h-auto">
+                            {feature.iconSvg}
+                          </svg>
+                        </div>
+                        <div className={`flex-grow h-full ${feature.iconPos === "top-left" ? "order-2" : "order-1"}`} style={stripedStyle}></div>
+                      </div>
+                      
+                      <div className="p-6 md:p-8 flex flex-col justify-end flex-grow">
+                        <h3 className="text-xl md:text-[24px] font-medium text-gray-900 mb-3 whitespace-pre-line leading-tight">
+                          {feature.title}
+                        </h3>
+                        <p className="text-sm md:text-[15px] text-gray-500 leading-relaxed whitespace-pre-line">
+                          {feature.description}
+                        </p>
+
+                        {/* Animated List */}
+                        <div className={`grid transition-all duration-500 ease-in-out ${isHovered ? "grid-rows-[1fr] mt-6 opacity-100" : "grid-rows-[0fr] mt-0 opacity-0"}`}>
+                          <div className="overflow-hidden">
+                            <ul className="flex flex-col gap-4 pb-4">
+                              {feature.bullets.map((bullet, i) => (
+                                <li key={i} className="flex items-start gap-3">
+                                  <AsteriskIcon />
+                                  <span className="text-sm md:text-[15px] text-gray-600 leading-snug">{bullet}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
               </div>
             );
           })}

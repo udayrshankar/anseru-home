@@ -1,199 +1,204 @@
 import React from 'react';
+// Placeholder import for the logo
+import PlaceholderLogo from '../assets/Anseru_3 3.png'; 
 
 export default function RFPWorkflow() {
   const nodes = [
     {
       title: "RFP Shredding",
-      cx: 140, 
-      cy: 350,
+      cx: 200, 
+      cy: 220,
       bullets: [
         "Break RFP into sections",
         "Identify key requirements",
         "Prepare for analysis"
       ],
-      icon: (
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="shrink-0">
-          <path d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2Z" fill="#a3e635" />
-          <path d="M14 2V8H20" fill="#3b82f6" />
-        </svg>
-      )
+      iconPath: "M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"
     },
     {
-      title: "Bid/No - Bid",
-      cx: 340, 
-      cy: 180,
+      title: "Bid/No Bid",
+      cx: 420, 
+      cy: 220,
       bullets: [
         "Evaluate opportunity fit",
         "Assess win probability",
         "Decide to pursue"
       ],
-      icon: (
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="shrink-0">
-          <circle cx="12" cy="18" r="3" fill="#facc15" />
-          <circle cx="6" cy="6" r="3" fill="#facc15" />
-          <circle cx="18" cy="6" r="3" fill="#facc15" />
-          <path d="M12 16V10 M12 10L7 7 M12 10L17 7" stroke="#facc15" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      )
+      iconPath: "M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
     },
     {
       title: "Requirement Tagging",
-      cx: 580, 
-      cy: 180,
+      cx: 640, 
+      cy: 220,
       bullets: [
         "Categorize RFP questions",
         "Tag by topic",
         "Route to teams"
       ],
-      icon: (
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="shrink-0">
-          <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" fill="#a3e635" />
-          <path d="M7 7h.01" stroke="#3b82f6" strokeWidth="3" strokeLinecap="round" />
-        </svg>
-      )
+      iconPath: "M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.41l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.41zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"
     },
     {
       title: "Proposal Outline",
-      cx: 840, 
-      cy: 180,
+      cx: 860, 
+      cy: 220,
       bullets: [
         "Generate proposal structure",
         "Organize response sections",
         "Define response flow"
       ],
-      icon: (
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="shrink-0">
-          <path d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2Z" fill="#a3e635" />
-          <path d="M8 13h8 M8 17h5" stroke="#000" strokeWidth="2" strokeLinecap="round" />
-        </svg>
-      )
+      iconPath: "M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
     },
     {
       title: "First Winnable Draft",
-      cx: 840, 
-      cy: 520,
+      cx: 860, 
+      cy: 480,
       bullets: [
         "Generate initial responses",
-        "Use past knowledge",
+        "Past knowledge grounded",
         "Create first draft"
       ],
-      icon: (
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a3e635" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-          <circle cx="9" cy="7" r="4" />
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-        </svg>
-      )
+      iconPath: "M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
     },
     {
       title: "Refine SME Collaboration",
       cx: 580, 
-      cy: 520,
+      cy: 480,
       bullets: [
         "SME review inputs",
         "Improve response quality",
         "Finalize proposal draft"
       ],
-      icon: (
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="shrink-0">
-          <path d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2Z" fill="#facc15" />
-          <path d="M14 2V8H20" fill="#3b82f6" />
-        </svg>
-      )
+      iconPath: "M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"
+    },
+    {
+      title: "Win or loss",
+      cx: 320, 
+      cy: 480,
+      bullets: [
+        "SME review inputs",
+        "Improve response quality",
+        "Finalize proposal draft"
+      ],
+      iconPath: "M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
     }
   ];
 
   return (
-    <div className="w-full py-20 md:py-24 bg-[#f8f9fa] font-sans overflow-hidden">
-      <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+    <div className="w-full py-16 md:py-24 bg-[#f8f9fa] font-sans overflow-hidden">
+      <div className="max-w-[1200px] mx-auto px-6">
         
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-start mb-12 gap-8">
-          <div className="space-y-2">
-            <p className="text-[14px] font-medium text-gray-500 uppercase tracking-wide">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
+          <div className="space-y-2 w-full md:w-1/2">
+            <p className="text-[14px] font-medium text-gray-500 uppercase tracking-wider">
               The Future Of RFP Responses
             </p>
-            <h2 className="text-4xl md:text-[46px] font-medium text-black leading-[1.1] tracking-tight">
-              From RFP to<br />Winning Proposal
+            <h2 className="text-3xl md:text-[46px] font-medium text-[#111827] leading-tight tracking-tight">
+              From RFP to<br className="hidden md:block" /> Winning Proposal
             </h2>
           </div>
-          <p className="text-[16px] text-gray-500 max-w-[550px] leading-relaxed md:mt-6">
-            Anseru orchestrates the entire response lifecycle with AI agents analyzing requirements, generating drafts, and enabling teams to refine and deliver high-quality proposals with speed and precision.
-          </p>
+          <div className="w-full md:w-1/2 flex md:justify-end">
+            <p className="text-base text-gray-500 max-w-[480px] leading-relaxed">
+              Anseru orchestrates the entire response lifecycle with AI agents analyzing requirements, generating drafts, and enabling teams to refine and deliver high-quality proposals with speed and precision.
+            </p>
+          </div>
         </div>
 
         {/* Workflow Diagram Section */}
-        {/* Using horizontal scroll container on small screens to preserve exact SVG layout */}
-        <div className="w-full overflow-x-auto pb-12 -mx-6 px-6 md:mx-0 md:px-0">
-          <div className="relative min-w-[1050px] h-[700px] mx-auto select-none">
+        <div className="w-full overflow-x-auto pb-8 -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide">
+          <div className="relative min-w-[1050px] h-[600px] md:h-[750px] mx-auto select-none">
             
-            {/* Base SVG Layer for lines and dots */}
             <svg 
               className="absolute inset-0 w-full h-full pointer-events-none" 
-              viewBox="0 0 1050 700" 
+              viewBox="0 0 1050 750" 
               fill="none" 
               xmlns="http://www.w3.org/2000/svg"
             >
-              {/* Main curved connection path */}
+              <defs>
+                <linearGradient id="mainPathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#d9f99d" />
+                  <stop offset="30%" stopColor="#bae6fd" />
+                  <stop offset="70%" stopColor="#fbcfe8" />
+                  <stop offset="100%" stopColor="#fef08a" />
+                </linearGradient>
+
+                <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#3b82f6" />
+                  <stop offset="100%" stopColor="#ef4444" />
+                </linearGradient>
+              </defs>
+
               <path 
-                d="M 140 350 L 20 350 C 250 350, 50 180, 340 180 L 840 180 C 1000 180, 1000 520, 840 520 L 580 520" 
-                stroke="#111" 
-                strokeWidth="1" 
+                d="M 150 220 
+                   L 910 220 
+                   A 130 130 0 0 1 910 480 
+                   L 150 480 
+                   A 130 130 0 0 1 150 220 Z" 
+                stroke="url(#mainPathGradient)" 
+                strokeWidth="8" 
+                strokeDasharray="2 6"
+                strokeLinecap="round"
+                fill="none"
               />
               
-              {/* Dotted Lines and Circles */}
               {nodes.map((node, i) => (
                 <g key={`lines-${i}`}>
                   <line 
-                    x1={node.cx} y1={node.cy} 
-                    x2={node.cx} y2={node.cy + 90} 
-                    stroke="#111" 
-                    strokeWidth="1" 
-                    strokeDasharray="2 3" 
+                    x1={node.cx} y1={node.cy + 24} 
+                    x2={node.cx} y2={node.cy + 75} 
+                    stroke="#111827" 
+                    strokeWidth="1.2" 
+                    strokeDasharray="2 4" 
                   />
-                  <circle 
-                    cx={node.cx} 
-                    cy={node.cy + 90} 
-                    r="4.5" 
-                    fill="#111" 
-                  />
+                  <circle cx={node.cx} cy={node.cy + 75} r="2.5" fill="#111827" />
                 </g>
               ))}
             </svg>
 
-            {/* HTML Layer for absolute positioned Nodes and Lists */}
+            {/* Logo Node */}
+            <div 
+              className="absolute z-20 flex items-center justify-center w-[50px] h-[50px] md:w-[60px] md:h-[60px] rounded-full bg-gradient-to-br from-indigo-500 to-pink-500 shadow-xl"
+              style={{ left: 40, top: 350, transform: 'translate(-50%, -50%)' }}
+            >
+                <img src={PlaceholderLogo} alt="Logo" className="w-6 h-6 md:w-8 md:h-8 object-contain" />
+            </div>
+
+            {/* Render Nodes and Bullet Lists */}
             {nodes.map((node, i) => (
               <React.Fragment key={`node-${i}`}>
-                {/* Black Box Node */}
                 <div 
-                  className="absolute flex items-center gap-3 bg-[#0a0a0a] rounded-[6px] px-5 py-3 z-10"
+                  className="absolute flex items-center justify-center gap-2.5 bg-white rounded-lg px-4 py-2 z-10 shadow-sm border border-gray-100"
                   style={{ 
                     left: node.cx, 
                     top: node.cy, 
-                    transform: 'translate(-50%, -50%)' 
+                    transform: 'translate(-50%, -50%)',
+                    background: `linear-gradient(white, white) padding-box, linear-gradient(90deg, #3b82f6, #ef4444) border-box`,
+                    border: '1.5px solid transparent'
                   }}
                 >
-                  {node.icon}
-                  <span className="text-white text-[17px] tracking-[0.01em] whitespace-nowrap">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="url(#primaryGradient)" className="shrink-0">
+                    <path d={node.iconPath} />
+                  </svg>
+                  <span className="text-[#111827] text-sm md:text-base font-medium whitespace-nowrap">
                     {node.title}
                   </span>
                 </div>
 
-                {/* Dotted Bullet List */}
                 <div 
-                  className="absolute w-[220px]"
+                  className="absolute w-[200px] md:w-[240px]"
                   style={{ 
                     left: node.cx, 
-                    top: node.cy + 110, 
+                    top: node.cy + 95, 
                     transform: 'translateX(-50%)' 
                   }}
                 >
-                  <ul className="flex flex-col gap-[6px]">
+                  <ul className="flex flex-col gap-2">
                     {node.bullets.map((bullet, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5">
-                        <span className="w-[3px] h-[3px] bg-gray-400 rounded-full mt-[8px] shrink-0"></span>
-                        <span className="text-[13px] text-gray-500 leading-snug">
+                      <li key={idx} className="flex items-start gap-2">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="1.5" strokeLinecap="round" className="shrink-0 mt-1">
+                          <path d="M12 2v20M2 12h20M5 5l14 14M5 19L19 5" />
+                        </svg>
+                        <span className="text-xs md:text-sm text-gray-500 leading-snug">
                           {bullet}
                         </span>
                       </li>
@@ -205,7 +210,6 @@ export default function RFPWorkflow() {
 
           </div>
         </div>
-
       </div>
     </div>
   );
