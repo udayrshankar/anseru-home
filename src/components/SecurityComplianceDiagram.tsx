@@ -24,7 +24,7 @@ export default function SecurityComplianceDiagram() {
 
         {/* Diagram Section */}
         <div className="relative w-full overflow-hidden flex justify-center py-10">
-          <div className="relative w-[320px] h-[320px] md:w-[480px] md:h-[480px] shrink-0 transform scale-[0.85] sm:scale-100">
+          <div className="relative w-[320px] h-[320px] md:w-[480px] md:h-[480px] shrink-0 transform scale-[0.85] sm:scale-100 -translate-y-16">
             
             {/* Subtle Center Glow */}
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[240px] h-[240px] md:w-[320px] md:h-[320px] bg-[#fbfde9] rounded-full blur-[40px] md:blur-[60px] opacity-80 z-0"></div>
