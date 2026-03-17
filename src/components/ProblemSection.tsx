@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Import your custom bullet point assets
-import salesBullet from "../assets/group.png";
-import securityBullet from "../assets/group (1).png";
-import complianceBullet from "../assets/group (2).png";
+import salesBullet from "../assets/Group.png";
+import securityBullet from "../assets/Group (1).png";
+import complianceBullet from "../assets/Group (2).png";
 
 interface Team {
   id: string;
