@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Import your custom bullet point assets
@@ -6,7 +7,17 @@ import salesBullet from "../assets/group.png";
 import securityBullet from "../assets/group (1).png";
 import complianceBullet from "../assets/group (2).png";
 
-const TeamCard = ({ team }) => {
+interface Team {
+  id: string;
+  title: ReactNode;
+  description: string;
+  gradient: string;
+  bulletIcon: string;
+  features: (string | ReactNode)[];
+  icon: ReactNode;
+}
+
+const TeamCard = ({ team }: { team: Team }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
