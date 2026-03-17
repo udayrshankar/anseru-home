@@ -12,18 +12,20 @@ import FAQSection from "../components/FAQSection";
 
 export default function Index() {
   return (
-    <div className="w-full">
-      <Navbar />
-      <HeroBanner />
-      <ProblemSection />
+    <div className="w-full h-screen overflow-y-auto snap-y snap-mandatory">
+      <div className="snap-start">
+        <Navbar />
+        <HeroBanner />
+      </div>
+      <div className="snap-start"><ProblemSection /></div>
       <Carousel />
-      <TwoAgents />
-      <RFPWorkflow />
-      <Features />
-      <Integration />
-      <SecurityComplianceDiagram />
-      <FAQSection />
-      <Footer />
+      <div className="snap-start"><TwoAgents /></div>
+      <div className="snap-start"><RFPWorkflow /></div>
+      <div className="snap-start"><Features /></div>
+      <div className="snap-start"><Integration /></div>
+      <div className="snap-start"><SecurityComplianceDiagram /></div>
+      <div className="snap-start"><FAQSection /></div>
+      <div className="snap-start"><Footer /></div>
     </div>
   );
 }

@@ -108,9 +108,9 @@ export default function Features() {
               >
                 {/* Content Block */}
                 <div className="flex flex-col flex-grow h-full">
-                  {feature.textPos === "top" ? (
+                  {feature.textPos === "top" && !isHovered ? (
                     <>
-                      <div className="p-6 md:p-8 flex-grow">
+                      <div className={`p-6 md:p-8 flex-grow transition-all duration-500 ${isHovered ? 'md:pl-4' : ''}`}>
                         <h3 className="text-xl md:text-[24px] font-medium text-gray-900 mb-3 whitespace-pre-line leading-tight">
                           {feature.title}
                         </h3>
@@ -147,15 +147,15 @@ export default function Features() {
                     <>
                       <div className="h-20 md:h-[104px] flex w-full shrink-0">
                         <div
-                          className={`w-20 md:w-[104px] h-20 md:h-[104px] flex items-center justify-center shrink-0 ${feature.iconPos === "top-left" ? "order-1" : "order-2"}`}
+                          className={`w-20 md:w-[104px] h-20 md:h-[104px] flex items-center justify-center shrink-0 ${ (isHovered || feature.iconPos === "top-left") ? "order-1" : "order-2"}`}
                           style={{ backgroundColor: feature.blueHex }}
                         >
                           <img src={feature.iconPng} alt="" className="w-10 h-10 md:w-16 md:h-16 object-contain" />
                         </div>
-                        <div className={`flex-grow h-full ${feature.iconPos === "top-left" ? "order-2" : "order-1"}`} style={stripedStyle}></div>
+                        <div className={`flex-grow h-full ${ (isHovered || feature.iconPos === "top-left") ? "order-2" : "order-1"}`} style={stripedStyle}></div>
                       </div>
 
-                      <div className="p-6 md:p-8 flex flex-col justify-end flex-grow">
+                      <div className={`p-6 md:p-8 flex flex-col justify-end flex-grow transition-all duration-500 ${isHovered ? 'md:pl-20' : ''}`}>
                         <h3 className="text-xl md:text-[24px] font-medium text-gray-900 mb-3 whitespace-pre-line leading-tight">
                           {feature.title}
                         </h3>

@@ -8,51 +8,48 @@ import frame10 from '../assets/Frame (10).png';
 /* ── Agent data ─────────────────────────────────────────────────── */
 
 const agentData = {
-  sud: {
+  archer: {
     title: "RFP Agent",
-    gradient: "linear-gradient(135deg, #1d36a8 0%, #294ae0 40%, #4369fb 70%, #5880ff 100%)",
-    tags: ["80% faster drafting", "Understands complex RFPs", "Helps sales close deals"],
+    gradient: "linear-gradient(180deg, #201cae 0%, #6aa4ee 100%)",
+    tags: ["Instant RFP breakdown", "Terminology translation", "Proposal-ready answers"],
     stats: [
       {
-        heading: "Instant, deal-ready\nfirst drafts",
-        detail: "80% reduction in drafting time",
+        heading: "Instant RFP\nintelligence",
+        detail: "Automatically extracts key\nrequirements, timelines,\nstakeholders, and evaluation criteria.",
       },
       {
-        heading: "80% reduction in\ndrafting time",
-        detail: "Handles messy formats and\nduplicate questions",
+        heading: "Terminology\nmapping",
+        detail: "Translates feature requirements to\nyour internal product language.",
       },
       {
-        heading: "Human review\nwhere it matters",
-        detail: "75% fewer SME touchpoints",
+        heading: "Bid / No-\nBid clarity",
+        detail: "Helps teams decide whether to\npursue..",
       },
     ],
-    switchLabel: "Meet KG",
-    switchIcon: kgIcon,
+    switchLabel: "Meet Archer",
+    switchIcon: sudIcon,
     decorativeImage: frame9,
   },
-  kg: {
+  knox: {
     title: "Security\nQuestionnaire Agent",
-    gradient: "linear-gradient(135deg, #3b5bdb 0%, #6f42c1 40%, #d6336c 70%, #fa5252 100%)",
+    gradient: "linear-gradient(45deg, #1d80f9 0%, #e74f62 100%)",
     tags: ["Evidence-backed answers", "No contradictions", "Compliance-ready"],
     stats: [
       {
         heading: "95%+ response\naccuracy",
-        subheading: "Evidence-Back Responses",
         detail: "Answers generated from verified policies and security documentation",
       },
       {
         heading: "70–90% faster\nsecurity reviews",
-        subheading: "Faster Security Reviews",
         detail: "Eliminate repetitive questionnaires across deals",
       },
       {
         heading: "100% audit-ready\nanswers",
-        subheading: "Always Current & Audit-Ready",
         detail: "Automatically detects outdated responses",
       },
     ],
-    switchLabel: "Meet Sud",
-    switchIcon: sudIcon,
+    switchLabel: "Meet Knox",
+    switchIcon: kgIcon,
     decorativeImage: frame10,
   },
 };
@@ -60,7 +57,7 @@ const agentData = {
 /* ── Main component ─────────────────────────────────────────────── */
 
 export default function TwoAgents() {
-  const [activeAgent, setActiveAgent] = useState<'sud' | 'kg'>('sud');
+  const [activeAgent, setActiveAgent] = useState<'archer' | 'knox'>('archer');
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const handleScroll = () => {
@@ -68,20 +65,19 @@ export default function TwoAgents() {
     const scrollPosition = scrollContainerRef.current.scrollLeft;
     const slideWidth = scrollContainerRef.current.clientWidth;
     const newIndex = Math.round(scrollPosition / slideWidth);
-    const newAgent = newIndex === 0 ? 'sud' : 'kg';
+    const newAgent = newIndex === 0 ? 'archer' : 'knox';
     if (newAgent !== activeAgent) setActiveAgent(newAgent);
   };
 
   useEffect(() => {
-    // Component now uses native horizontal scrolling with snap-x.
-    // No special event listeners needed for basic horizontal behavior.
+    // Component uses native horizontal scrolling with snap-x.
   }, []);
 
-  const scrollToAgent = (agent: 'sud' | 'kg') => {
+  const scrollToAgent = (agent: 'archer' | 'knox') => {
     if (!scrollContainerRef.current) return;
     const slideWidth = scrollContainerRef.current.clientWidth;
     scrollContainerRef.current.scrollTo({
-      left: agent === 'sud' ? 0 : slideWidth,
+      left: agent === 'archer' ? 0 : slideWidth,
       behavior: "smooth",
     });
   };
@@ -91,83 +87,98 @@ export default function TwoAgents() {
       <div className="max-w-[1200px] mx-auto px-6">
 
         {/* ── Header ──────────────────────────────────────────── */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gap-6">
-          <div className="space-y-2">
-            <p className="text-sm font-medium text-gray-500 capitalize tracking-wider">Proven Results</p>
-            <h2 className="text-3xl md:text-[44px] font-medium text-black" style={{ letterSpacing: '-0.03em' }}>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-6">
+          <div className="space-y-1">
+            <p className="text-[14px] text-gray-500 font-medium">Proven Results</p>
+            <h2 className="text-3xl md:text-[42px] font-medium text-black" style={{ letterSpacing: '-0.02em' }}>
               Two Super Agents
             </h2>
           </div>
 
           {/* Tab buttons */}
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 bg-gray-100 p-1 rounded-xl">
             <button
-              onClick={() => scrollToAgent('sud')}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-[15px] transition-all cursor-pointer ${activeAgent === 'sud'
-                ? 'bg-black text-white'
-                : 'bg-transparent text-black hover:bg-gray-100'
-                }`}
+              onClick={() => scrollToAgent('archer')}
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-[16px] transition-all cursor-pointer ${
+                activeAgent === 'archer'
+                  ? 'bg-black text-white'
+                  : 'bg-transparent text-black hover:bg-gray-200'
+              }`}
             >
-              Meet Sud
-              <img src={sudIcon} alt="Sud" width="18" height="18" className={activeAgent === 'sud' ? 'brightness-0 invert' : ''} />
+              Meet Archer
+              <img
+                src={sudIcon}
+                alt="Archer"
+                width="16"
+                height="16"
+                className={activeAgent === 'archer' ? '' : 'invert-0'}
+              />
             </button>
             <button
-              onClick={() => scrollToAgent('kg')}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-[15px] transition-all cursor-pointer ${activeAgent === 'kg'
-                ? 'bg-black text-white'
-                : 'bg-transparent text-black hover:bg-gray-100'
-                }`}
+              onClick={() => scrollToAgent('knox')}
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-[16px] transition-all cursor-pointer ${
+                activeAgent === 'knox'
+                  ? 'bg-black text-white'
+                  : 'bg-transparent text-black hover:bg-gray-200'
+              }`}
             >
-              Meet Kg
-              <img src={kgIcon} alt="Kg" width="18" height="18" className={activeAgent === 'kg' ? 'brightness-0 invert' : ''} />
+              Meet Knox
+              <img
+                src={kgIcon}
+                alt="Knox"
+                width="16"
+                height="16"
+                className={activeAgent === 'knox' ? 'brightness-0 invert' : ''}
+              />
             </button>
           </div>
         </div>
 
         {/* ── Main content – bordered container ───────────────── */}
-        <div className="border border-gray-300 rounded-2xl overflow-hidden">
+        <div className="border border-[#e5e7eb] rounded-xl overflow-hidden bg-white">
           <div
             ref={scrollContainerRef}
             onScroll={handleScroll}
-            className="flex overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] smooth-scroll-container"
+            className="flex overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
             style={{ scrollBehavior: 'smooth' }}
           >
             {Object.entries(agentData).map(([key, agent]) => (
-              <div key={key} className="min-w-full w-full flex flex-col lg:flex-row flex-shrink-0 snap-start">
-                {/* LEFT: Agent visual card — with margin */}
-                <div className="lg:w-[42%] p-3 md:p-4 relative">
+              <div key={key} className="min-w-full w-full flex flex-col lg:flex-row flex-shrink-0 snap-start items-stretch">
+
+                {/* LEFT: Agent visual card */}
+                <div className="lg:w-[48%] p-3.5 bg-white border-b lg:border-b-0 lg:border-r border-[#e5e7eb] flex-shrink-0">
                   <div
-                    className="relative flex flex-col justify-between p-8 md:p-10 h-[460px] md:h-[520px] overflow-hidden transition-all duration-500 ease-in-out"
+                    className="relative flex flex-col justify-between p-10 h-[500px] md:h-[540px] overflow-hidden"
                     style={{ background: agent.gradient }}
                   >
                     {/* Noise texture */}
                     <div
-                      className="absolute inset-0 opacity-100 mix-blend-overlay pointer-events-none"
+                      className="absolute inset-0 opacity-100 pointer-events-none"
                       style={{
                         backgroundImage: `url(${noiseImage})`,
                         backgroundSize: '200px 200px',
                       }}
                     />
 
-                    {/* Decorative images */}
-                    <div className="relative ">
-                      <img 
-                        src={agent.decorativeImage} 
-                        alt="" 
-                        className="w-32 h-auto md:w-40 opacity-80"
+                    {/* Decorative image */}
+                    <div className="relative">
+                      <img
+                        src={agent.decorativeImage}
+                        alt=""
+                        className="w-36 h-auto opacity-90"
                       />
                     </div>
 
-                    {/* Agent name + tags — unfilled, border-only pills */}
-                    <div className="relative mt-auto pt-10">
-                      <h3 className="text-white text-2xl md:text-[32px] font-semibold tracking-tight mb-5 leading-tight whitespace-pre-line transition-all duration-500 ease-in-out">
+                    {/* Agent name + tags */}
+                    <div className="relative mt-auto">
+                      <h3 className="text-white text-[32px] md:text-[36px] font-medium tracking-tight mb-2 leading-tight whitespace-pre-line">
                         {agent.title}
                       </h3>
-                      <div className="flex flex-wrap gap-2 md:gap-3">
+                      <div className="flex flex-wrap gap-2.5">
                         {agent.tags.map((tag, i) => (
                           <span
                             key={i}
-                            className="text-white text-[12px] md:text-[13px] px-3.5 py-1.5 rounded-[5px] border border-white/30 font-medium"
+                            className="text-white text-[13px] md:text-[14px] px-3.5 py-1.5 bg-white/20 rounded-[4px] border border-white/40 font-normal"
                           >
                             {tag}
                           </span>
@@ -177,71 +188,57 @@ export default function TwoAgents() {
                   </div>
                 </div>
 
-                {/* 1px vertical divider line */}
-                <div className="hidden lg:block w-px bg-gray-300 flex-shrink-0" />
-
-                {/* RIGHT: Stats grid — #F3F3F1 at 68% opacity */}
-                <div className="lg:flex-1 grid grid-cols-1 sm:grid-cols-2 grid-rows-2 transition-all duration-500 ease-in-out">
-                  {/* Top Left */}
-                  <div className="p-7 md:p-8 flex flex-col justify-between border-b border-r border-gray-200 h-full" style={{ backgroundColor: 'rgba(243, 243, 241, 0.68)' }}>
-                    <h4 className="text-[22px] md:text-[25.73px] font-medium text-black whitespace-pre-line transition-all duration-500 ease-in-out" style={{ lineHeight: '100%', letterSpacing: '-0.04em' }}>
-                      {agent.stats[0].heading}
-                    </h4>
-                    <div className="mt-8">
-                      {'subheading' in agent.stats[0] && agent.stats[0].subheading && (
-                        <p className="text-[14px] md:text-[16px] text-black font-medium mb-1" style={{ letterSpacing: '-0.02em' }}>
-                          {agent.stats[0].subheading}
+                {/* RIGHT: Stats grid */}
+                <div className='p-4 border border-l-black relative overflow-hidden'>
+                  <div 
+                    className="absolute inset-0 pointer-events-none opacity-[0.2]" 
+                    style={{
+                      backgroundImage: `
+                        linear-gradient(to right, #000 1px, transparent 1px),
+                        linear-gradient(to bottom, #000 1px, transparent 1px)
+                      `,
+                      backgroundSize: '150px 150px'
+                    }}
+                  />
+                  
+                    <div className="h-full grid grid-cols-2 grid-rows-2 bg-[#f4f4f5] relative z-10">
+                      {/* Top Left */}
+                      <div className="p-8 md:p-10 flex flex-col justify-between border-b border-r border-[#e5e7eb]">
+                        <h4 className="text-[24px] font-medium text-black whitespace-pre-line" style={{ lineHeight: '1.2', letterSpacing: '-0.03em' }}>
+                          {agent.stats[0].heading}
+                        </h4>
+                        <p className="text-[14px] text-black font-medium leading-relaxed">
+                          {agent.stats[0].detail}
                         </p>
-                      )}
-                      <p className="text-[13px] md:text-[14px] text-gray-500 font-normal" style={{ lineHeight: '1.4', letterSpacing: '-0.01em' }}>
-                        {agent.stats[0].detail}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Top Right */}
-                  <div className="p-7 md:p-8 flex flex-col justify-between border-b border-gray-200 h-full" style={{ backgroundColor: 'rgba(243, 243, 241, 0.68)' }}>
-                    <h4 className="text-[22px] md:text-[25.73px] font-medium text-black whitespace-pre-line transition-all duration-500 ease-in-out" style={{ lineHeight: '100%', letterSpacing: '-0.04em' }}>
-                      {agent.stats[1].heading}
-                    </h4>
-                    <div className="mt-8">
-                      {'subheading' in agent.stats[1] && agent.stats[1].subheading && (
-                        <p className="text-[14px] md:text-[16px] text-black font-medium mb-1" style={{ letterSpacing: '-0.02em' }}>
-                          {agent.stats[1].subheading}
+                      </div>
+                      {/* Top Right */}
+                      <div className="p-8 md:p-10 flex flex-col justify-between border-b border-[#e5e7eb] ">
+                        <h4 className="text-[24px] font-medium text-black whitespace-pre-line" style={{ lineHeight: '1.2', letterSpacing: '-0.03em' }}>
+                          {agent.stats[1].heading}
+                        </h4>
+                        <p className="text-[14px] text-black font-medium leading-relaxed">
+                          {agent.stats[1].detail}
                         </p>
-                      )}
-                      <p className="text-[13px] md:text-[14px] text-gray-500 font-normal" style={{ lineHeight: '1.4', letterSpacing: '-0.01em' }}>
-                        {agent.stats[1].detail}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Bottom Left */}
-                  <div className="p-7 md:p-8 flex flex-col justify-between border-r border-gray-200 h-full" style={{ backgroundColor: 'rgba(243, 243, 241, 0.68)' }}>
-                    <h4 className="text-[22px] md:text-[25.73px] font-medium text-black whitespace-pre-line transition-all duration-500 ease-in-out" style={{ lineHeight: '100%', letterSpacing: '-0.04em' }}>
-                      {agent.stats[2].heading}
-                    </h4>
-                    <div className="mt-8">
-                      {'subheading' in agent.stats[2] && agent.stats[2].subheading && (
-                        <p className="text-[14px] md:text-[16px] text-black font-medium mb-1" style={{ letterSpacing: '-0.02em' }}>
-                          {agent.stats[2].subheading}
+                      </div>
+                      {/* Bottom Left */}
+                      <div className="p-8 md:p-10 flex flex-col justify-between border-r border-[#e5e7eb]">
+                        <h4 className="text-[24px] font-medium text-black whitespace-pre-line" style={{ lineHeight: '1.2', letterSpacing: '-0.03em' }}>
+                          {agent.stats[2].heading}
+                        </h4>
+                        <p className="text-[14px] text-black font-medium leading-relaxed">
+                          {agent.stats[2].detail}
                         </p>
-                      )}
-                      <p className="text-[13px] md:text-[14px] text-gray-500 font-normal" style={{ lineHeight: '1.4', letterSpacing: '-0.01em' }}>
-                        {agent.stats[2].detail}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Bottom Right – Switch button */}
-                  <div className="p-7 md:p-8 flex flex-col justify-end items-end h-full" style={{ backgroundColor: 'rgba(243, 243, 241, 0.68)' }}>
-                    <button
-                      onClick={() => scrollToAgent(key === 'sud' ? 'kg' : 'sud')}
-                      className="flex items-center gap-2 bg-black text-white text-[14px] font-medium px-6 py-3 rounded-lg hover:bg-gray-800 transition cursor-pointer"
-                    >
-                      {agent.switchLabel}
-                      <img src={agent.switchIcon} alt="" width="16" height="16" className="brightness-0 invert" />
-                    </button>
+                      </div>
+                      {/* Bottom Right – Switch button */}
+                      <div className="p-8 md:p-10 flex flex-col justify-end items-end">
+                        <button
+                          onClick={() => scrollToAgent(key === 'archer' ? 'knox' : 'archer')}
+                          className="flex items-center gap-2 bg-black text-white text-[14px] font-medium px-5 py-2.5 rounded-lg hover:bg-gray-800 transition cursor-pointer"
+                        >
+                          {agent.switchLabel}
+                          <img src={agent.switchIcon} alt="" width="16" height="16" />
+                        </button>
+                      </div>
                   </div>
                 </div>
 

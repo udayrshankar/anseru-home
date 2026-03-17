@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+
 
 // Import slide images
 import slide1Img from '../assets/Intro Page.png';
@@ -106,36 +106,6 @@ const CircleOverlay = () => (
 /* ── Main component ───────────────────────────────────────────────── */
 
 export default function Carousel() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const handleScroll = () => {
-      const scrollLeft = container.scrollLeft;
-      const width = container.clientWidth;
-      const newIndex = Math.round(scrollLeft / width);
-      
-      if (newIndex !== currentIndex) {
-        setCurrentIndex(newIndex);
-      }
-    };
-
-    container.addEventListener('scroll', handleScroll, { passive: true });
-    return () => container.removeEventListener('scroll', handleScroll);
-  }, [currentIndex]);
-
-  const scrollToSlide = (index: number) => {
-    if (!containerRef.current) return;
-    const width = containerRef.current.clientWidth;
-    containerRef.current.scrollTo({
-      left: width * index,
-      behavior: 'smooth'
-    });
-  };
-
   const bullets = [
     "Automatically indexes past RFPs, security docs, and content",
     "Keeps responses accurate with up-to-date sources",
@@ -143,129 +113,104 @@ export default function Carousel() {
   ];
 
   return (
-    <div className="w-full bg-white relative py-20 overflow-hidden">
-      <div className="max-w-[1300px] mx-auto px-6 w-full flex flex-col">
-          {/* ── Global Header ──────────────────────────────────────── */}
-          <div className="text-center mb-16 space-y-2">
-            <p className="text-[14px] font-medium capitalize tracking-wide" style={{ color: "#808080" }}>
-              How It Works
-            </p>
-            <h2
-              className="text-4xl md:text-[42px] font-medium leading-[1.2] tracking-tight"
-              style={{ color: "#111111" }}
-            >
-              How Anseru Turns Knowledge
-              <br />
-              Into Winning Deals
-            </h2>
-          </div>
-
-          <div className="flex-1 w-full flex flex-col h-full relative">
-            {/* Scrollable track */}
-            <div
-              ref={containerRef}
-              className="flex h-full w-full overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-            >
-              <style dangerouslySetInnerHTML={{ __html: `
-                .no-scrollbar::-webkit-scrollbar { display: none; }
-              `}} />
-              {slideData.map((slide) => (
-                <div
-                  key={slide.id}
-                  className="w-full h-full grid md:grid-cols-[2fr_3fr] gap-8 md:gap-12 items-start flex-shrink-0 snap-center"
-                >
-                  {/* ── Left column ──────────────────────────────── */}
-                  <div className="pr-4">
-                    <div className="space-y-7">
-                      <div className="space-y-4">
-                        <h3
-                          className="text-[28px] md:text-[32px] font-medium leading-tight"
-                          style={{ color: "#111111" }}
-                        >
-                          {slide.title}
-                        </h3>
-                        <p
-                          className="text-[15px] md:text-[16px] leading-[1.6] max-w-[95%]"
-                          style={{ color: "#666666" }}
-                        >
-                          {slide.description}
-                        </p>
-                      </div>
-
-                      <div className="space-y-4 pt-2">
-                        {bullets.map((text, i) => (
-                          <BulletPoint
-                            key={i}
-                            text={text}
-                            style={slide.bulletStyle}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* ── Right column – gradient card ─────────────── */}
-                  <div className="pr-4 md:pr-8 h-full flex items-center">
-                    <div
-                      className={`p-8 md:p-10 pb-0 text-white w-full h-[450px] md:h-[650px] flex flex-col justify-start relative overflow-hidden shadow-lg ${slide.gradientClass}`}
-                    >
-                      {/* Circle overlay decoration */}
-                      <CircleOverlay />
-
-                      {/* Noise / grain texture */}
-                      <div
-                        className="absolute inset-0 opacity-100 pointer-events-none"
-                        style={{
-                          backgroundImage: `url(${noiseImage})`,
-                          backgroundSize: '200px 200px',
-                          mixBlendMode: "overlay"
-                        }}
-                      />
-
-                      {/* Text content */}
-                      <div className="relative z-10 space-y-3 mb-10">
-                        <p className="text-[12px] md:text-[14px] font-medium opacity-90 tracking-wide">
-                          Ask. Find. Respond—Instantly.
-                        </p>
-                        <h4 className="text-[30px] md:text-[34px] font-medium leading-[1.15] tracking-tight max-w-[320px]">
-                          Turn complex RFPs into clear, winning responses
-                        </h4>
-                      </div>
-
-                      {/* Product mockup image */}
-                      <div className="relative z-10 mt-auto shadow-2xl rounded-t-lg overflow-hidden translate-y-15 translate-x-15">
-                        <img
-                          src={slide.image}
-                          alt={slide.title}
-                          className="w-full h-auto object-cover object-top bg-white/10 rounded-t-lg"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* ── Pagination dashes ──────────────────────────────── */}
-            <div className="flex gap-2 mt-8 md:mt-4 justify-center md:justify-start">
-              {slideData.map((_slide, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => scrollToSlide(idx)}
-                  aria-label={`Go to slide ${idx + 1}`}
-                  className="transition-all duration-300 rounded-full"
-                  style={{
-                    width: idx === currentIndex ? "150px" : "60px",
-                    height: idx === currentIndex ? "4px" : "2px",
-                    backgroundColor:
-                      idx === currentIndex ? "#000000" : "#E0E0E0",
-                  }}
-                />
-              ))}
-            </div>
-          </div>
+    <div className="w-full bg-white relative">
+      {/* ── Global Header – Sticky ─────────────────────────────── */}
+      <div className="z-20 pt-20 pb-10 bg-white/95 backdrop-blur-sm">
+        <div className="text-center space-y-2">
+          <p className="text-[14px] font-medium capitalize tracking-wide" style={{ color: "#808080" }}>
+            How It Works
+          </p>
+          <h2
+            className="text-4xl md:text-[42px] font-medium leading-[1.2] tracking-tight"
+            style={{ color: "#111111" }}
+          >
+            How Anseru Turns Knowledge
+            <br />
+            Into Winning Deals
+          </h2>
         </div>
       </div>
-    );
+
+      {/* Slides rendered as individual page sections */}
+      <div className="flex flex-col w-full">
+        {slideData.map((slide) => (
+          <div
+            key={slide.id}
+            className="w-full h-screen flex items-center justify-center snap-start px-6"
+          >
+            <div className="max-w-[1300px] mx-auto w-full grid md:grid-cols-[2fr_3fr] gap-8 md:gap-12 items-center">
+              {/* ── Left column ──────────────────────────────── */}
+              <div className="pr-4">
+                <div className="space-y-7">
+                  <div className="space-y-4">
+                    <h3
+                      className="text-[28px] md:text-[32px] font-medium leading-tight"
+                      style={{ color: "#111111" }}
+                    >
+                      {slide.title}
+                    </h3>
+                    <p
+                      className="text-[15px] md:text-[16px] leading-[1.6] max-w-[95%]"
+                      style={{ color: "#666666" }}
+                    >
+                      {slide.description}
+                    </p>
+                  </div>
+
+                  <div className="space-y-4 pt-2">
+                    {bullets.map((text, i) => (
+                      <BulletPoint
+                        key={i}
+                        text={text}
+                        style={slide.bulletStyle}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* ── Right column – gradient card ─────────────── */}
+              <div className="pr-4 md:pr-8 h-full flex items-center py-10 md:py-20">
+                <div
+                  className={`p-8 md:p-10 pb-0 text-white w-full h-[450px] md:h-[600px] flex flex-col justify-start relative overflow-hidden shadow-lg ${slide.gradientClass}`}
+                >
+                  {/* Circle overlay decoration */}
+                  <CircleOverlay />
+
+                  {/* Noise / grain texture */}
+                  <div
+                    className="absolute inset-0 opacity-100 pointer-events-none"
+                    style={{
+                      backgroundImage: `url(${noiseImage})`,
+                      backgroundSize: '200px 200px',
+                      mixBlendMode: "overlay"
+                    }}
+                  />
+
+                  {/* Text content */}
+                  <div className="relative z-10 space-y-3 mb-10">
+                    <p className="text-[12px] md:text-[14px] font-medium opacity-90 tracking-wide">
+                      Ask. Find. Respond—Instantly.
+                    </p>
+                    <h4 className="text-[30px] md:text-[34px] font-medium leading-[1.15] tracking-tight max-w-[320px]">
+                      Turn complex RFPs into clear, winning responses
+                    </h4>
+                  </div>
+
+                  {/* Product mockup image */}
+                  <div className="relative z-10 mt-auto aspect-[494/384] rounded-t-lg overflow-hidden translate-y-12 translate-x-12">
+                    <img
+                      src={slide.image}
+                      alt={slide.title}
+                      className="w-full h-full object-contain object-top rounded-lg"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
