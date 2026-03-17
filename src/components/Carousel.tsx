@@ -113,10 +113,10 @@ export default function Carousel() {
   ];
 
   return (
-    <div className="w-full bg-white relative py-20 overflow-hidden">
-      <div className="max-w-[1300px] mx-auto px-6 w-full flex flex-col">
-        {/* ── Global Header ──────────────────────────────────────── */}
-        <div className="text-center mb-16 space-y-2">
+    <div className="w-full bg-white relative">
+      {/* ── Global Header – Sticky ─────────────────────────────── */}
+      <div className="z-20 pt-20 pb-10 bg-white/95 backdrop-blur-sm">
+        <div className="text-center space-y-2">
           <p className="text-[14px] font-medium capitalize tracking-wide" style={{ color: "#808080" }}>
             How It Works
           </p>
@@ -129,20 +129,16 @@ export default function Carousel() {
             Into Winning Deals
           </h2>
         </div>
+      </div>
 
-        {/* Scrollable track */}
-        <div
-          className="flex flex-col w-full h-[550px] md:h-[650px] overflow-y-auto snap-y snap-mandatory scroll-smooth no-scrollbar"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        >
-          <style dangerouslySetInnerHTML={{ __html: `
-            .no-scrollbar::-webkit-scrollbar { display: none; }
-          `}} />
-          {slideData.map((slide) => (
-            <div
-              key={slide.id}
-              className="w-full h-full grid md:grid-cols-[2fr_3fr] gap-8 md:gap-12 items-start flex-shrink-0 snap-center"
-            >
+      {/* Slides rendered as individual page sections */}
+      <div className="flex flex-col w-full">
+        {slideData.map((slide) => (
+          <div
+            key={slide.id}
+            className="w-full h-screen flex items-center justify-center snap-start px-6"
+          >
+            <div className="max-w-[1300px] mx-auto w-full grid md:grid-cols-[2fr_3fr] gap-8 md:gap-12 items-center">
               {/* ── Left column ──────────────────────────────── */}
               <div className="pr-4">
                 <div className="space-y-7">
@@ -174,9 +170,9 @@ export default function Carousel() {
               </div>
 
               {/* ── Right column – gradient card ─────────────── */}
-              <div className="pr-4 md:pr-8 h-full flex items-center">
+              <div className="pr-4 md:pr-8 h-full flex items-center py-10 md:py-20">
                 <div
-                  className={`p-8 md:p-10 pb-0 text-white w-full h-[450px] md:h-[650px] flex flex-col justify-start relative overflow-hidden shadow-lg ${slide.gradientClass}`}
+                  className={`p-8 md:p-10 pb-0 text-white w-full h-[450px] md:h-[600px] flex flex-col justify-start relative overflow-hidden shadow-lg ${slide.gradientClass}`}
                 >
                   {/* Circle overlay decoration */}
                   <CircleOverlay />
@@ -202,7 +198,7 @@ export default function Carousel() {
                   </div>
 
                   {/* Product mockup image */}
-                  <div className="relative z-10 mt-auto aspect-[494/384] rounded-t-lg overflow-hidden translate-y-12 translate-x-27">
+                  <div className="relative z-10 mt-auto aspect-[494/384] rounded-t-lg overflow-hidden translate-y-12 translate-x-12">
                     <img
                       src={slide.image}
                       alt={slide.title}
@@ -212,8 +208,8 @@ export default function Carousel() {
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );
