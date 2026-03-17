@@ -15,12 +15,7 @@ export default function FutureSection() {
             alt="AI background"
           />
 
-          {/* Vertical strip - Hidden on small mobile or made smaller */}
-          <div className="absolute left-0 top-0 bottom-0 w-12 md:w-28 bg-black flex items-center justify-center z-10">
-            <p className="text-white text-xs md:text-md tracking-widest -rotate-90 whitespace-nowrap">
-              Powered by Agentic <span className="text-yellow-400">AI.</span>
-            </p>
-          </div>
+
 
           {/* Glass Feature Card */}
           <div className="relative z-20 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 md:p-8 space-y-3 md:space-y-4 md:translate-x-20 lg:translate-x-40">

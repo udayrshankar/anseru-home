@@ -62,7 +62,7 @@ export default function ProblemSection() {
         {/* Team cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {teams.map((team, idx) => (
-            <div key={idx} className="bg-gray-50 overflow-hidden flex flex-col rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div key={idx} className="overflow-hidden flex flex-col rounded-lg shadow-sm hover:shadow-md transition-shadow" style={{ backgroundColor: '#f8f8f8' }}>
               <div className="p-6 md:p-8 flex flex-col flex-1 relative">
                 {/* Gradient stripe on right */}
                 <div
@@ -73,7 +73,7 @@ export default function ProblemSection() {
                   {team.description}
                 </p>
                 <div className="flex-1 flex items-end justify-center min-h-[150px]">
-                  <div className="w-full max-w-[180px]">
+                  <div className="w-4/5">
                     {team.icon}
                   </div>
                 </div>

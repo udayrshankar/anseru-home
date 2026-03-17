@@ -1,5 +1,10 @@
 import { useState } from "react";
 
+import IconLiving from "../assets/living.png";
+import IconFrame from "../assets/Frame.png";
+import IconEvidence from "../assets/evidence.png";
+import IconGovernance from "../assets/governance.png";
+
 export default function Features() {
   const [hoveredIndex, setHoveredIndex] = useState(-1);
 
@@ -20,15 +25,7 @@ export default function Features() {
         "Keeps responses accurate with up-to-date sources",
         "Improves continuously as teams use the platform",
       ],
-      iconSvg: (
-        <path
-          d="M32.6329 40.7918C37.1387 40.7918 40.7913 37.1392 40.7913 32.6334C40.7913 28.1277 37.1387 24.4751 32.6329 24.4751C28.1272 24.4751 24.4746 28.1277 24.4746 32.6334C24.4746 37.1392 28.1272 40.7918 32.6329 40.7918Z M32.6329 24.4751V15 M32.6329 40.7918V50 M24.4746 32.6334H15 M40.7913 32.6334H50"
-          stroke="white"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      ),
+      iconPng: IconLiving,
     },
     {
       title: "Cross-Team\nCollaboration",
@@ -41,13 +38,7 @@ export default function Features() {
         "Track progress and approvals in real-time",
         "Integrate directly with your existing workspace tools",
       ],
-      iconSvg: (
-        <>
-          <circle cx="24" cy="24" r="5" stroke="white" strokeWidth="2" fill="none" />
-          <circle cx="42" cy="24" r="5" stroke="white" strokeWidth="2" fill="none" />
-          <path d="M20 44 Q 33 34 46 44" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round" />
-        </>
-      ),
+      iconPng: IconFrame,
     },
     {
       title: "Evidence & Citation engine",
@@ -60,15 +51,7 @@ export default function Features() {
         "Verify claims with side-by-side document views",
         "Flag outdated information automatically",
       ],
-      iconSvg: (
-        <path
-          d="M35 5H15C13.6739 5 12.4021 5.52678 11.4645 6.46447C10.5268 7.40215 10 8.67392 10 10V50C10 51.3261 10.5268 52.5979 11.4645 53.5355C12.4021 54.4732 13.6739 55 15 55H45C46.3261 55 47.5979 54.4732 48.5355 53.5355C49.4732 52.5979 50 51.3261 50 50V20L35 5Z M35 5V20H50 M22 35 L30 43 L42 27"
-          stroke="white"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      ),
+      iconPng: IconEvidence,
     },
     {
       title: "Governance &\nAnalytics",
@@ -81,15 +64,7 @@ export default function Features() {
         "Set up role-based access control and permissions",
         "Export detailed reports and audit logs for review",
       ],
-      iconSvg: (
-        <path
-          d="M15 52.5V26.25M27 52.5V10.5M39 52.5V36.75M51 52.5V21"
-          stroke="white"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      ),
+      iconPng: IconGovernance,
     },
   ];
 
@@ -100,7 +75,7 @@ export default function Features() {
   );
 
   return (
-    <div className="w-full py-16 md:py-24 bg-white font-sans">
+    <div className="w-full py-16 md:py-24 bg-white">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-start mb-12 md:mb-16 gap-6 md:gap-8">
@@ -157,16 +132,14 @@ export default function Features() {
                           </div>
                         </div>
                       </div>
-                      
+
                       <div className="h-20 md:h-[104px] flex w-full shrink-0 mt-auto">
                         <div className={`flex-grow h-full ${feature.iconPos === "bottom-left" ? "order-2" : "order-1"}`} style={stripedStyle}></div>
                         <div
                           className={`w-20 md:w-[104px] h-20 md:h-[104px] flex items-center justify-center shrink-0 ${feature.iconPos === "bottom-left" ? "order-1" : "order-2"}`}
                           style={{ backgroundColor: feature.blueHex }}
                         >
-                          <svg width="40" height="40" viewBox="0 0 66 66" fill="none" className="w-10 h-10 md:w-auto md:h-auto">
-                            {feature.iconSvg}
-                          </svg>
+                          <img src={feature.iconPng} alt="" className="w-10 h-10 md:w-16 md:h-16 object-contain" />
                         </div>
                       </div>
                     </>
@@ -177,13 +150,11 @@ export default function Features() {
                           className={`w-20 md:w-[104px] h-20 md:h-[104px] flex items-center justify-center shrink-0 ${feature.iconPos === "top-left" ? "order-1" : "order-2"}`}
                           style={{ backgroundColor: feature.blueHex }}
                         >
-                          <svg width="40" height="40" viewBox="0 0 66 66" fill="none" className="w-10 h-10 md:w-auto md:h-auto">
-                            {feature.iconSvg}
-                          </svg>
+                          <img src={feature.iconPng} alt="" className="w-10 h-10 md:w-16 md:h-16 object-contain" />
                         </div>
                         <div className={`flex-grow h-full ${feature.iconPos === "top-left" ? "order-2" : "order-1"}`} style={stripedStyle}></div>
                       </div>
-                      
+
                       <div className="p-6 md:p-8 flex flex-col justify-end flex-grow">
                         <h3 className="text-xl md:text-[24px] font-medium text-gray-900 mb-3 whitespace-pre-line leading-tight">
                           {feature.title}

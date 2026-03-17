@@ -126,3 +126,16 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* Carousel slide-specific backgrounds */
+.gradient-royal-blue {
+  background: #2A41C7;
+}
+
+.gradient-blue-crimson {
+  background: linear-gradient(90deg, #2A41C7 0%, #C7192A 100%);
+}
+
+.gradient-violet {
+  background: #3B0B98;
+}
