@@ -1,6 +1,4 @@
-import React from 'react';
 import logo from "../assets/Anseru_3 3.png"; // We can reuse the same logo or the text one if there's a specific one. The design shows standard Anseru logo with text.
-import textLogo from "../assets/Vector.png"; // Original logo used in Footer.tsx
 import bg151 from "../assets/151.png";
 
 export default function Footer() {

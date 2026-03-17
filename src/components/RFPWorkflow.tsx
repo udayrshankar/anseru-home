@@ -1,4 +1,3 @@
-import React from 'react';
 import Logo from '../assets/Anseru_3 3.png';
 import BulletIcon from '../assets/Vector (3).png';
 
