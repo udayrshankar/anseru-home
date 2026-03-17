@@ -9,7 +9,7 @@ export default function SecurityComplianceDiagram() {
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-28">
           <div className="max-w-[500px]">
-            <p className="text-[#6b7280] text-[15px] font-medium mb-3">
+            <p className="text-[#6b7280] text-[18px] font-regular">
               Security And Compliance
             </p>
             <h2 className="text-[#111827] text-4xl md:text-[44px] font-medium leading-[1.15] tracking-tight">
@@ -55,17 +55,17 @@ export default function SecurityComplianceDiagram() {
               <img
                 src={shieldImg}
                 alt=""
-                className="absolute inset-0 w-full h-full object-contain opacity-20"
+                className="absolute inset-0 w-full h-full object-contain opacity-100"
               />
               {/* Fallback geometric shield shape behind the logo if the image is transparent/missing */}
               <div className="absolute inset-0 w-full h-full flex items-center justify-center z-0">
-                 <svg viewBox="0 0 100 110" className="w-[140px] h-[160px] text-[#f3f4f6]">
+                 <svg viewBox="0 0 100 110" className="w-[140px] h-[160px] text-[#eee5e7]">
                     <path d="M50 0 L100 20 L100 60 C100 85 50 110 50 110 C50 110 0 85 0 60 L0 20 Z" fill="currentColor" />
                  </svg>
               </div>
 
               {/* Black Logo Bubble */}
-              <div className="relative z-20 w-[60px] h-[60px] rounded-full shadow-lg flex items-center justify-center overflow-hidden bg-black p-3">
+              <div className="relative z-20 w-[60px] h-[60px] rounded-full shadow-lg flex items-center justify-center overflow-hidden bg-black ">
                 <img
                   src={bwlogo}
                   alt="Anseru Logo"
@@ -89,7 +89,7 @@ export default function SecurityComplianceDiagram() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 6 l 1 1 l 1 -1 l -1 -1 z" fill="white" />
                 </svg>
               </div>
-              <div className="absolute left-[calc(100%+24px)] top-1/2 -translate-y-1/2 w-[300px] text-left">
+              <div className="absolute left-[calc(100%+24px)] top-1/2 -translate-y-1/2 w-[400px] text-left">
                 <h3 className="text-[19px] font-medium text-[#111827] mb-1.5 leading-tight">
                   Access Control & Governance
                 </h3>
@@ -103,7 +103,7 @@ export default function SecurityComplianceDiagram() {
             <div className="absolute z-20" style={{ top: '75%', left: '85%', transform: 'translate(-50%, -50%)' }}>
               <div
                 className="relative w-[86px] h-[86px] rounded-full shadow-[0_8px_24px_rgba(230,76,99,0.3)] overflow-hidden flex items-center justify-center p-5"
-                style={{ background: 'linear-gradient(135deg, #E64C63 0%, #4D81E5 100%)' }}
+                style={{ background: 'linear-gradient(180deg, #fe404b 0%, #61b6ef 100%)' }}
               >
                 {/* Eye & Star Icon */}
                 <svg fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.2" className="w-full h-full">
@@ -112,7 +112,7 @@ export default function SecurityComplianceDiagram() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 6 l 1 1 l 1 -1 l -1 -1 z" fill="white" />
                 </svg>
               </div>
-              <div className="absolute left-[calc(100%+24px)] top-1/2 -translate-y-1/2 w-[300px] text-left">
+              <div className="absolute left-[calc(100%+24px)] top-1/2 -translate-y-1/2 w-[400px] text-left">
                 <h3 className="text-[19px] font-medium text-[#111827] mb-1.5 leading-tight">
                   Responsible AI & Model Usage
                 </h3>
@@ -126,14 +126,14 @@ export default function SecurityComplianceDiagram() {
             <div className="absolute z-20" style={{ top: '92%', left: '42%', transform: 'translate(-50%, -50%)' }}>
               <div
                 className="relative w-[86px] h-[86px] rounded-full shadow-[0_8px_24px_rgba(46,15,110,0.3)] overflow-hidden flex items-center justify-center p-5"
-                style={{ background: 'linear-gradient(135deg, #2E0F6E 0%, #5B21B6 100%)' }}
+                style={{ background: 'linear-gradient(180deg, #2b2b2bff 0%, #5B21B6 100%)' }}
               >
                 {/* Bar Chart Icon */}
                 <svg fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.5" className="w-full h-full">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18v-4 M10 18v-8 M14 18v-12 M18 18v-6" />
                 </svg>
               </div>
-              <div className="absolute right-[calc(100%+24px)] top-1/2 -translate-y-1/2 w-[320px] text-right">
+              <div className="absolute right-[calc(100%+24px)] top-1/2 -translate-y-1/2 w-[400px] text-right">
                 <h3 className="text-[19px] font-medium text-[#111827] mb-1.5 leading-tight">
                   Verifiable & Trusted Answers
                 </h3>
@@ -147,7 +147,7 @@ export default function SecurityComplianceDiagram() {
             <div className="absolute z-20" style={{ top: '55%', left: '9%', transform: 'translate(-50%, -50%)' }}>
               <div
                 className="relative w-[86px] h-[86px] rounded-full shadow-[0_8px_24px_rgba(113,178,204,0.3)] overflow-hidden flex items-center justify-center p-5"
-                style={{ background: 'linear-gradient(135deg, #71B2CC 0%, #D4D145 100%)' }}
+                style={{ background: 'linear-gradient(180deg, #71B2CC 0%, #D4D145 100%)' }}
               >
                 {/* Funnel + Check Icon */}
                 <svg fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.2" className="w-full h-full">
@@ -155,7 +155,7 @@ export default function SecurityComplianceDiagram() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M14 15l2 2 4-4" strokeWidth="2" />
                 </svg>
               </div>
-              <div className="absolute right-[calc(100%+24px)] top-1/2 -translate-y-1/2 w-[300px] text-right">
+              <div className="absolute right-[calc(100%+24px)] top-1/2 -translate-y-1/2 w-[400px] text-right">
                 <h3 className="text-[19px] font-medium text-[#111827] mb-1.5 leading-tight">
                   Competitive Inteligence
                 </h3>
