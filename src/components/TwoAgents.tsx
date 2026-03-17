@@ -15,7 +15,7 @@ const agentData = {
     stats: [
       {
         heading: "Instant RFP\nintelligence",
-        detail: "Automatically extracts key\nrequirements, timelines,\nstakeholders, and evaluation criteria.",
+        detail: "Automatically extracts key requirements, timelines, stakeholders, and evaluation criteria.",
       },
       {
         heading: "Terminology\nmapping",
@@ -37,15 +37,15 @@ const agentData = {
     stats: [
       {
         heading: "95%+ response\naccuracy",
-        detail: "Answers generated from verified policies and security documentation",
+        detail: "Generated from verified security documentation.",
       },
       {
         heading: "70–90% faster\nsecurity reviews",
-        detail: "Eliminate repetitive questionnaires across deals",
+        detail: "Eliminates repetitive questionnaires saving SME time",
       },
       {
-        heading: "100% audit-ready\nanswers",
-        detail: "Automatically detects outdated responses",
+        heading: "Audit-ready\nanswers",
+        detail: "Aligned with current policies and controls.",
       },
     ],
     switchLabel: "Meet SUD",
