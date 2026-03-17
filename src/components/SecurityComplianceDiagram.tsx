@@ -144,7 +144,7 @@ export default function SecurityComplianceDiagram() {
             </div>
 
             {/* Node 4: Competitive Intelligence (Top Left) */}
-            <div className="absolute z-20" style={{ top: '40C%', left: '9%', transform: 'translate(-50%, -50%)' }}>
+            <div className="absolute z-20" style={{ top: '40%', left: '9%', transform: 'translate(-50%, -50%)' }}>
               <div
                 className="relative w-[86px] h-[86px] rounded-full shadow-[0_8px_24px_rgba(113,178,204,0.3)] overflow-hidden flex items-center justify-center p-5"
                 style={{ background: 'linear-gradient(180deg, #71B2CC 0%, #D4D145 100%)' }}
