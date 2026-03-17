@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from 'react';
 import sudIcon from '../assets/Sud.png';
 import kgIcon from '../assets/kg.png';
 import noiseImage from '../assets/noise.png';
+import frame9 from '../assets/Frame (9).png';
+import frame10 from '../assets/Frame (10).png';
 
 /* ── Agent data ─────────────────────────────────────────────────── */
 
@@ -26,7 +28,7 @@ const agentData = {
     ],
     switchLabel: "Meet KG",
     switchIcon: kgIcon,
-    diamonds: true,
+    decorativeImage: frame9,
   },
   kg: {
     title: "Security\nQuestionnaire Agent",
@@ -51,7 +53,7 @@ const agentData = {
     ],
     switchLabel: "Meet Sud",
     switchIcon: sudIcon,
-    diamonds: false,
+    decorativeImage: frame10,
   },
 };
 
@@ -71,22 +73,8 @@ export default function TwoAgents() {
   };
 
   useEffect(() => {
-    const el = scrollContainerRef.current;
-    if (!el) return;
-
-    const handleWheel = (e: WheelEvent) => {
-      const isAtLeft = el.scrollLeft <= 0;
-      const isAtRight = el.scrollLeft + el.clientWidth >= el.scrollWidth - 1;
-
-      if (e.deltaY < 0 && isAtLeft) return;
-      if (e.deltaY > 0 && isAtRight) return;
-
-      e.preventDefault();
-      el.scrollBy({ left: e.deltaY, behavior: 'auto' });
-    };
-
-    el.addEventListener('wheel', handleWheel, { passive: false });
-    return () => el.removeEventListener('wheel', handleWheel);
+    // Component now uses native horizontal scrolling with snap-x.
+    // No special event listeners needed for basic horizontal behavior.
   }, []);
 
   const scrollToAgent = (agent: 'sud' | 'kg') => {
@@ -149,33 +137,25 @@ export default function TwoAgents() {
                 {/* LEFT: Agent visual card — with margin */}
                 <div className="lg:w-[42%] p-3 md:p-4 relative">
                   <div
-                    className="relative flex flex-col justify-between p-8 md:p-10 h-[460px] md:h-[520px] rounded-xl overflow-hidden transition-all duration-500 ease-in-out"
+                    className="relative flex flex-col justify-between p-8 md:p-10 h-[460px] md:h-[520px] overflow-hidden transition-all duration-500 ease-in-out"
                     style={{ background: agent.gradient }}
                   >
                     {/* Noise texture */}
                     <div
-                      className="absolute inset-0 opacity-40 mix-blend-overlay pointer-events-none"
+                      className="absolute inset-0 opacity-100 mix-blend-overlay pointer-events-none"
                       style={{
                         backgroundImage: `url(${noiseImage})`,
                         backgroundSize: '200px 200px',
                       }}
                     />
 
-                    {/* Decorative shapes — outline only, no fill */}
-                    <div className="relative pt-4 pl-4">
-                      {agent.diamonds ? (
-                        <div className="relative w-28 h-28 md:w-36 md:h-36">
-                          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-10 md:w-14 md:h-14 border-2 border-white/40 rounded-[10px] rotate-45" />
-                          <div className="absolute top-1/2 left-0 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 border-2 border-white/40 rounded-[10px] rotate-45" />
-                          <div className="absolute top-1/2 right-0 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 border-2 border-white/40 rounded-[10px] rotate-45" />
-                          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-10 h-10 md:w-14 md:h-14 border-2 border-white/40 rounded-[10px] rotate-45" />
-                        </div>
-                      ) : (
-                        <div className="relative w-36 h-36 md:w-44 md:h-44 flex">
-                          <div className="w-[70px] h-[70px] md:w-[90px] md:h-[90px] border-2 border-white/40 rounded-[18px] relative z-10" />
-                          <div className="w-[70px] h-[70px] md:w-[90px] md:h-[90px] border-2 border-white/40 rounded-[18px] absolute bottom-0 right-0 z-0" />
-                        </div>
-                      )}
+                    {/* Decorative images */}
+                    <div className="relative ">
+                      <img 
+                        src={agent.decorativeImage} 
+                        alt="" 
+                        className="w-32 h-auto md:w-40 opacity-80"
+                      />
                     </div>
 
                     {/* Agent name + tags — unfilled, border-only pills */}
