@@ -1,3 +1,6 @@
+import { motion } from "framer-motion";
+
+// Asset imports
 import slack from "../assets/slack icon.png";
 import notion from "../assets/notion icon.png";
 import drive from "../assets/drive icon.png";
@@ -10,13 +13,17 @@ import highspot from "../assets/highspot icon.png";
 import gong from "../assets/gong icon.png";
 
 export default function Integrations() {
-
   const col1 = [seismic, drive, zendesk, onedrive];
   const col2 = [highspot, slack, gong];
   const col3 = [hubspot, zendesk, notion, teams];
 
+  // Duplicate arrays to create a seamless infinite loop effect
+  const repeatedCol1 = [...col1, ...col1];
+  const repeatedCol2 = [...col2, ...col2, ...col2]; // Tripled so it fills the height properly for down-scroll
+  const repeatedCol3 = [...col3, ...col3];
+
   const Card = ({ logo }: { logo: string }) => (
-    <div className="w-[80px] h-[80px] md:w-[110px] md:h-[110px] bg-white rounded-xl md:rounded-2xl border border-gray-100 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
+    <div className="w-[80px] h-[80px] md:w-[110px] md:h-[110px] bg-white rounded-xl md:rounded-2xl border border-gray-100 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow shrink-0">
       <img
         src={logo}
         alt="integration logo"
@@ -27,38 +34,58 @@ export default function Integrations() {
 
   return (
     <section className="py-16 md:py-24 bg-white">
-
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row gap-12 md:gap-24 items-center">
-
+        
         {/* FRAME CONTAINER */}
-        <div className="w-full max-w-[420px] aspect-square bg-gray-50 rounded-3xl overflow-hidden flex items-center justify-center p-6 md:p-0">
+        <div className="w-full max-w-[420px] aspect-square bg-gray-50 rounded-3xl overflow-hidden flex items-center justify-center relative pointer-events-none">
+          
+          {/* Top & Bottom fade gradients for a polished look */}
+          <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-gray-50 to-transparent z-10" />
+          <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-gray-50 to-transparent z-10" />
 
           {/* LOGO GRID */}
-          <div className="flex gap-2 md:gap-3">
-
-            {/* Column 1 */}
-            <div className="flex flex-col gap-2 md:gap-3">
-              {col1.map((logo, i) => (
-                <Card key={i} logo={logo} />
-              ))}
+          <div className="flex gap-3 md:gap-4 items-center h-[200%]">
+            
+            {/* Column 1 - Scrolling Up */}
+            <div className="mt-10 md:mt-20 overflow-visible">
+              <motion.div
+                className="flex flex-col gap-3 md:gap-4"
+                animate={{ y: ["0%", "-50%"] }}
+                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+              >
+                {repeatedCol1.map((logo, i) => (
+                  <Card key={`col1-${i}`} logo={logo} />
+                ))}
+              </motion.div>
             </div>
 
-            {/* Column 2 */}
-            <div className="flex flex-col gap-2 md:gap-3 mt-10 md:mt-20">
-              {col2.map((logo, i) => (
-                <Card key={i} logo={logo} />
-              ))}
+            {/* Column 2 - Scrolling Down */}
+            <div className="overflow-visible">
+              <motion.div
+                className="flex flex-col gap-3 md:gap-4"
+                animate={{ y: ["-50%", "0%"] }}
+                transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+              >
+                {repeatedCol2.map((logo, i) => (
+                  <Card key={`col2-${i}`} logo={logo} />
+                ))}
+              </motion.div>
             </div>
 
-            {/* Column 3 */}
-            <div className="flex flex-col gap-2 md:gap-3 mt-5 md:mt-10">
-              {col3.map((logo, i) => (
-                <Card key={i} logo={logo} />
-              ))}
+            {/* Column 3 - Scrolling Up */}
+            <div className="mt-5 md:mt-10 overflow-visible">
+              <motion.div
+                className="flex flex-col gap-3 md:gap-4"
+                animate={{ y: ["0%", "-50%"] }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              >
+                {repeatedCol3.map((logo, i) => (
+                  <Card key={`col3-${i}`} logo={logo} />
+                ))}
+              </motion.div>
             </div>
 
           </div>
-
         </div>
 
         {/* TEXT SECTION */}
@@ -66,7 +93,6 @@ export default function Integrations() {
           <p className="text-gray-500 mb-4 text-sm font-medium uppercase tracking-wider">
             Integrations
           </p>
-
           <h2 className="text-3xl md:text-[44px] font-medium text-gray-900 leading-tight tracking-tight">
             Connect to the Tools <br className="hidden md:block" />
             You Already Use
@@ -77,7 +103,6 @@ export default function Integrations() {
         </div>
 
       </div>
-
     </section>
   );
 }
