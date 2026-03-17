@@ -12,7 +12,7 @@ export default function SecurityComplianceDiagram() {
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12 md:mb-16">
           <div className="max-w-[500px]">
-            <p className="text-[#6b7280] text-sm md:text-[15px] font-medium mb-3 uppercase tracking-wider">
+            <p className="text-[#6b7280] text-sm md:text-[15px] font-medium mb-3 capitalize tracking-wider">
               Security Compliance
             </p>
             <h2 className="text-[#111827] text-3xl md:text-[44px] font-medium leading-tight tracking-tight">

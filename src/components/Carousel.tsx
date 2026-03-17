@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 // Import slide images
 import slide1Img from '../assets/Intro Page.png';
@@ -6,6 +6,7 @@ import slide2Img from '../assets/Intro Page (3).png';
 import slide3Img from '../assets/Intro Page (2).png';
 import slide4Img from '../assets/Intro Page (1).png';
 import bulletIcon from '../assets/Vector (2).png';
+import noiseImage from '../assets/noise.png';
 
 const slideData = [
   {
@@ -106,24 +107,46 @@ const CircleOverlay = () => (
 
 export default function Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleScroll = () => {
-    if (!scrollContainerRef.current) return;
-    const scrollPosition = scrollContainerRef.current.scrollLeft;
-    const slideWidth = scrollContainerRef.current.clientWidth;
-    const newIndex = Math.round(scrollPosition / slideWidth);
-    if (newIndex !== currentIndex) setCurrentIndex(newIndex);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      const { top, height } = containerRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      const scrollableDistance = height - windowHeight;
+      const currentScrollDistance = -top;
+
+      let progress = currentScrollDistance / scrollableDistance;
+      progress = Math.max(0, Math.min(1, progress));
+      setScrollProgress(progress);
+
+      const totalSlides = slideData.length;
+      const newIndex = Math.min(totalSlides - 1, Math.round(progress * (totalSlides - 1)));
+      if (newIndex !== currentIndex) setCurrentIndex(newIndex);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial check
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [currentIndex]);
 
   const scrollToSlide = (index: number) => {
-    if (!scrollContainerRef.current) return;
-    const slideWidth = scrollContainerRef.current.clientWidth;
-    scrollContainerRef.current.scrollTo({
-      left: slideWidth * index,
-      behavior: "smooth",
+    if (!containerRef.current) return;
+    const { top } = containerRef.current.getBoundingClientRect();
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const absoluteTop = top + scrollTop;
+
+    const windowHeight = window.innerHeight;
+    const scrollableDistance = containerRef.current.clientHeight - windowHeight;
+    const targetScrollY = absoluteTop + (index / (slideData.length - 1)) * scrollableDistance;
+
+    window.scrollTo({
+      top: targetScrollY,
+      behavior: 'smooth'
     });
-    setCurrentIndex(index);
   };
 
   const bullets = [
@@ -133,155 +156,156 @@ export default function Carousel() {
   ];
 
   return (
-    <div className="w-full bg-white flex flex-col justify-center max-h-screen pt-16 pb-8">
-      <div className="max-w-[1300px] mx-auto px-6 w-full h-full flex flex-col">
-        {/* ── Global Header ──────────────────────────────────────── */}
-        <div className="text-center mb-16 space-y-2">
-          <p className="text-[14px] font-medium uppercase tracking-wide" style={{ color: "#808080" }}>
-            How It Works
-          </p>
-          <h2
-            className="text-4xl md:text-[42px] font-medium leading-[1.2] tracking-tight"
-            style={{ color: "#111111" }}
-          >
-            How Anseru Turns Knowledge
-            <br />
-            Into Winning Deals
-          </h2>
-        </div>
-
-        <div className="flex relative">
-          {/* ── Scroll-down indicator (desktop, fixed to left of carousel) ── */}
-          <div className="hidden md:flex flex-col items-center flex-shrink-0 mr-5 pt-1">
-            <span
-              className="text-[10px] font-medium uppercase tracking-[0.15em]"
-              style={{
-                writingMode: "vertical-lr",
-                transform: "rotate(180deg)",
-                color: "#ccc",
-              }}
+    <div ref={containerRef} className="w-full bg-white relative h-[400vh]">
+      <div className="sticky top-0 h-screen w-full flex flex-col justify-center pt-16 pb-8 overflow-hidden">
+        <div className="max-w-[1300px] mx-auto px-6 w-full h-full flex flex-col">
+          {/* ── Global Header ──────────────────────────────────────── */}
+          <div className="text-center mb-16 space-y-2">
+            <p className="text-[14px] font-medium capitalize tracking-wide" style={{ color: "#808080" }}>
+              How It Works
+            </p>
+            <h2
+              className="text-4xl md:text-[42px] font-medium leading-[1.2] tracking-tight"
+              style={{ color: "#111111" }}
             >
-              Scroll Down
-            </span>
-            <svg
-              width="10"
-              height="40"
-              viewBox="0 0 10 40"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="mt-2"
-            >
-              <path
-                d="M5 0L5 36M5 36L1 30M5 36L9 30"
-                stroke="#E63946"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+              How Anseru Turns Knowledge
+              <br />
+              Into Winning Deals
+            </h2>
           </div>
 
-          {/* ── Main carousel container ──────────────────────────── */}
-          <div className="flex-1 w-full overflow-hidden flex flex-col h-full">
-            {/* Scrollable track */}
-            <div
-              ref={scrollContainerRef}
-              onScroll={handleScroll}
-              className="flex overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] h-full items-center"
-            >
-              {slideData.map((slide) => (
-                <div
-                  key={slide.id}
-                  className="min-w-full w-full snap-start grid md:grid-cols-[2fr_3fr] gap-8 md:gap-12 items-center h-full"
-                >
-                  {/* ── Left column ──────────────────────────────── */}
-                  <div className="pr-4">
-                    <div className="space-y-7">
-                      <div className="space-y-4">
-                        <h3
-                          className="text-[28px] md:text-[32px] font-medium leading-tight"
-                          style={{ color: "#111111" }}
-                        >
-                          {slide.title}
-                        </h3>
-                        <p
-                          className="text-[15px] md:text-[16px] leading-[1.6] max-w-[95%]"
-                          style={{ color: "#666666" }}
-                        >
-                          {slide.description}
-                        </p>
-                      </div>
-
-                      <div className="space-y-4 pt-2">
-                        {bullets.map((text, i) => (
-                          <BulletPoint
-                            key={i}
-                            text={text}
-                            style={slide.bulletStyle}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* ── Right column – gradient card ─────────────── */}
-                  <div className="pr-4 md:pr-8 h-full flex items-center">
-                    <div
-                      className={`rounded-[16px] p-8 md:p-10 pb-0 text-white w-full h-[450px] md:h-[500px] flex flex-col justify-start relative overflow-hidden shadow-lg ${slide.gradientClass}`}
-                    >
-                      {/* Circle overlay decoration */}
-                      <CircleOverlay />
-
-                      {/* Noise / grain texture */}
-                      <div className="absolute inset-0 opacity-20 pointer-events-none">
-                        <img
-                          src="https://api.builder.io/api/v1/image/assets/TEMP/d26bb697857f6dfdecc5fd729678160d30796f2e?width=1114"
-                          alt=""
-                          className="w-full h-full object-cover"
-                          style={{ mixBlendMode: "overlay" }}
-                        />
-                      </div>
-
-                      {/* Text content */}
-                      <div className="relative z-10 space-y-3 mb-10">
-                        <p className="text-[12px] md:text-[14px] font-medium opacity-90 tracking-wide">
-                          Ask. Find. Respond—Instantly.
-                        </p>
-                        <h4 className="text-[30px] md:text-[34px] font-medium leading-[1.15] tracking-tight max-w-[320px]">
-                          Turn complex RFPs into clear, winning responses
-                        </h4>
-                      </div>
-
-                      {/* Product mockup image */}
-                      <div className="relative z-10 mt-auto shadow-2xl rounded-t-lg overflow-hidden translate-y-15 translate-x-15">
-                        <img
-                          src={slide.image}
-                          alt={slide.title}
-                          className="w-full h-auto object-cover object-top bg-white/10 rounded-t-lg"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
+          <div className="flex relative">
+            {/* ── Scroll-down indicator (desktop, fixed to left of carousel) ── */}
+            <div className="hidden md:flex flex-col items-center flex-shrink-0 mr-5 pt-1">
+              <span
+                className="text-[10px] font-medium uppercase tracking-[0.15em]"
+                style={{
+                  writingMode: "vertical-lr",
+                  transform: "rotate(180deg)",
+                  color: "#ccc",
+                }}
+              >
+                Scroll Down
+              </span>
+              <svg
+                width="10"
+                height="40"
+                viewBox="0 0 10 40"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="mt-2"
+              >
+                <path
+                  d="M5 0L5 36M5 36L1 30M5 36L9 30"
+                  stroke="#E63946"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </div>
 
-            {/* ── Pagination dashes ──────────────────────────────── */}
-            <div className="flex gap-2 mt-8 md:mt-4 justify-center md:justify-start">
-              {slideData.map((_slide, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => scrollToSlide(idx)}
-                  aria-label={`Go to slide ${idx + 1}`}
-                  className="transition-all duration-300 rounded-full"
-                  style={{
-                    width: idx === currentIndex ? "150px" : "60px",
-                    height: idx === currentIndex ? "4px" : "2px",
-                    backgroundColor:
-                      idx === currentIndex ? "#000000" : "#E0E0E0",
-                  }}
-                />
-              ))}
+            {/* ── Main carousel container ──────────────────────────── */}
+            <div className="flex-1 w-full overflow-hidden flex flex-col h-full relative">
+              {/* Scrollable track */}
+              <div
+                className="flex h-full w-[400%] transition-transform duration-75 ease-out will-change-transform"
+                style={{ transform: `translateX(-${scrollProgress * 75}%)` }} // 75% because (4-1)/4
+              >
+                {slideData.map((slide) => (
+                  <div
+                    key={slide.id}
+                    className="w-1/4 h-full grid md:grid-cols-[2fr_3fr] gap-8 md:gap-12 items-center flex-shrink-0"
+                  >
+                    {/* ── Left column ──────────────────────────────── */}
+                    <div className="pr-4">
+                      <div className="space-y-7">
+                        <div className="space-y-4">
+                          <h3
+                            className="text-[28px] md:text-[32px] font-medium leading-tight"
+                            style={{ color: "#111111" }}
+                          >
+                            {slide.title}
+                          </h3>
+                          <p
+                            className="text-[15px] md:text-[16px] leading-[1.6] max-w-[95%]"
+                            style={{ color: "#666666" }}
+                          >
+                            {slide.description}
+                          </p>
+                        </div>
+
+                        <div className="space-y-4 pt-2">
+                          {bullets.map((text, i) => (
+                            <BulletPoint
+                              key={i}
+                              text={text}
+                              style={slide.bulletStyle}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* ── Right column – gradient card ─────────────── */}
+                    <div className="pr-4 md:pr-8 h-full flex items-center">
+                      <div
+                        className={`rounded-[16px] p-8 md:p-10 pb-0 text-white w-full h-[450px] md:h-[500px] flex flex-col justify-start relative overflow-hidden shadow-lg ${slide.gradientClass}`}
+                      >
+                        {/* Circle overlay decoration */}
+                        <CircleOverlay />
+
+                        {/* Noise / grain texture */}
+                        <div
+                          className="absolute inset-0 opacity-20 pointer-events-none"
+                          style={{
+                            backgroundImage: `url(${noiseImage})`,
+                            backgroundSize: '200px 200px',
+                            mixBlendMode: "overlay"
+                          }}
+                        />
+
+                        {/* Text content */}
+                        <div className="relative z-10 space-y-3 mb-10">
+                          <p className="text-[12px] md:text-[14px] font-medium opacity-90 tracking-wide">
+                            Ask. Find. Respond—Instantly.
+                          </p>
+                          <h4 className="text-[30px] md:text-[34px] font-medium leading-[1.15] tracking-tight max-w-[320px]">
+                            Turn complex RFPs into clear, winning responses
+                          </h4>
+                        </div>
+
+                        {/* Product mockup image */}
+                        <div className="relative z-10 mt-auto shadow-2xl rounded-t-lg overflow-hidden translate-y-15 translate-x-15">
+                          <img
+                            src={slide.image}
+                            alt={slide.title}
+                            className="w-full h-auto object-cover object-top bg-white/10 rounded-t-lg"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* ── Pagination dashes ──────────────────────────────── */}
+              <div className="flex gap-2 mt-8 md:mt-4 justify-center md:justify-start">
+                {slideData.map((_slide, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => scrollToSlide(idx)}
+                    aria-label={`Go to slide ${idx + 1}`}
+                    className="transition-all duration-300 rounded-full"
+                    style={{
+                      width: idx === currentIndex ? "150px" : "60px",
+                      height: idx === currentIndex ? "4px" : "2px",
+                      backgroundColor:
+                        idx === currentIndex ? "#000000" : "#E0E0E0",
+                    }}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>

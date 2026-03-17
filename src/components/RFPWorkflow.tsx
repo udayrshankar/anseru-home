@@ -118,8 +118,8 @@ export default function RFPWorkflow() {
         {/* ── Header ──────────────────────────────────────────── */}
         <div className="flex flex-col md:flex-row justify-between items-start gap-4 md:gap-6 mb-2">
           <div className="space-y-1 w-full md:w-1/2">
-            <p className="text-[13px] md:text-[14px] font-medium text-gray-500 uppercase tracking-wider">
-              The Future Of RFP Responses
+            <p className="text-[13px] md:text-[14px] font-medium text-gray-500 capitalize tracking-wider">
+              The Future of RFP Responses
             </p>
             <h2 className="text-2xl md:text-[42px] font-medium text-[#111827] leading-tight" style={{ letterSpacing: '-0.03em' }}>
               From RFP to<br className="hidden md:block" /> Winning Proposal

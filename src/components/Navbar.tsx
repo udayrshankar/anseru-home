@@ -43,7 +43,7 @@ export default function Navbar() {
 
         {/* CTA Button & Mobile Toggle */}
         <div className="flex items-center gap-4">
-          <button className="bg-transparent text-gray-600 px-5 py-2 rounded-[5px] text-sm font-medium hover:text-black hover:bg-gray-100 transition cursor-pointer">
+          <button className="bg-black text-white px-5 py-2 rounded-[5px] text-sm font-medium hover:bg-gray-800 transition cursor-pointer">
             Talk to Founders
           </button>
 

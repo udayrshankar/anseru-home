@@ -10,7 +10,12 @@ export default function SocialProof() {
   return (
     <div className="w-full py-16 md:py-20 bg-white border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-6">
-        <p className="text-center text-gray-400 text-sm font-medium uppercase tracking-widest mb-10">Trusted by Teams at</p>
+        {/* Header */}
+        <div className="text-center mb-10 md:mb-12">
+          <p className="text-[13px] md:text-sm font-medium text-gray-500 capitalize tracking-wider">
+            Trusted By Industry Leaders
+          </p>
+        </div>
         <div className="overflow-hidden">
           <div className="flex gap-4 md:gap-8 items-center justify-center flex-wrap">
             {logos.map((logo, index) => (
