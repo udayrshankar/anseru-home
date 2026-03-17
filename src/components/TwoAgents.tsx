@@ -1,11 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
-import knoxIcon from '../assets/knox.png';
-import kgIcon from '../assets/archer.png';
+import knoxIcon from '../assets/Sud.png';
+import kgIcon from '../assets/kg.png';
 import noiseImage from '../assets/noise.png';
 import frame9 from '../assets/Frame (9).png';
 import frame10 from '../assets/Frame (10).png';
 
-/* ── Agent data ─────────────────────────────────────────────────── */
 
 const agentData = {
   archer: {
@@ -54,7 +53,6 @@ const agentData = {
   },
 };
 
-/* ── Main component ─────────────────────────────────────────────── */
 
 export default function TwoAgents() {
   const [activeAgent, setActiveAgent] = useState<'archer' | 'knox'>('archer');
@@ -85,16 +83,14 @@ export default function TwoAgents() {
     <div className="w-full py-16 md:py-24 bg-white">
       <div className="max-w-[1200px] mx-auto px-6">
 
-        {/* ── Header ──────────────────────────────────────────── */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-6">
           <div className="space-y-1">
-            <p className="text-[14px] text-gray-500 font-medium">Proven Results</p>
-            <h2 className="text-3xl md:text-[42px] font-medium text-black" style={{ letterSpacing: '-0.02em' }}>
+            <p className="anseru-section-tag">Proven Results</p>
+            <h2 className="anseru-section-title">
               Two Super Agents
             </h2>
           </div>
 
-          {/* Tab buttons */}
           <div className="flex items-center gap-1 bg-gray-100 p-1 rounded-xl">
             <button
               onClick={() => scrollToAgent('archer')}
@@ -138,11 +134,11 @@ export default function TwoAgents() {
           <div
             ref={scrollContainerRef}
             onScroll={handleScroll}
-            className="flex overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            className="flex overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
             style={{ scrollBehavior: 'smooth' }}
           >
             {Object.entries(agentData).map(([key, agent]) => (
-              <div key={key} className="min-w-full w-full flex flex-col lg:flex-row flex-shrink-0 snap-start items-stretch">
+              <div key={key} className="min-w-full w-full flex flex-col lg:flex-row flex-shrink-0 items-stretch">
 
                 {/* LEFT: Agent visual card */}
                 <div className="lg:w-[48%] p-3.5 bg-white border-b lg:border-b-0 lg:border-r border-[#e5e7eb] flex-shrink-0">
@@ -188,9 +184,9 @@ export default function TwoAgents() {
                 </div>
 
                 {/* RIGHT: Stats grid */}
-                <div className='p-4 border border-l-black relative overflow-hidden'>
+                <div className='p-4 relative overflow-hidden'>
                   <div 
-                    className="absolute inset-0 pointer-events-none opacity-[0.2]" 
+                    className="absolute inset-0 pointer-events-none opacity-[0.1]" 
                     style={{
                       backgroundImage: `
                         linear-gradient(to right, #000 1px, transparent 1px),
@@ -203,28 +199,28 @@ export default function TwoAgents() {
                     <div className="h-full grid grid-cols-2 grid-rows-2 bg-[#f4f4f5] relative z-10">
                       {/* Top Left */}
                       <div className="p-8 md:p-10 flex flex-col justify-between border-b border-r border-[#e5e7eb]">
-                        <h4 className="text-[24px] font-medium text-black whitespace-pre-line" style={{ lineHeight: '1.2', letterSpacing: '-0.03em' }}>
+                        <h4 className="text-[24px] font-normal text-black whitespace-pre-line leading-[1.2] tracking-[-0.03em]">
                           {agent.stats[0].heading}
                         </h4>
-                        <p className="text-[14px] text-black font-medium leading-relaxed">
+                        <p className="anseru-section-description">
                           {agent.stats[0].detail}
                         </p>
                       </div>
                       {/* Top Right */}
                       <div className="p-8 md:p-10 flex flex-col justify-between border-b border-[#e5e7eb] ">
-                        <h4 className="text-[24px] font-medium text-black whitespace-pre-line" style={{ lineHeight: '1.2', letterSpacing: '-0.03em' }}>
+                        <h4 className="text-[24px] font-normal text-black whitespace-pre-line leading-[1.2] tracking-[-0.03em]">
                           {agent.stats[1].heading}
                         </h4>
-                        <p className="text-[14px] text-black font-medium leading-relaxed">
+                        <p className="anseru-section-description">
                           {agent.stats[1].detail}
                         </p>
                       </div>
                       {/* Bottom Left */}
                       <div className="p-8 md:p-10 flex flex-col justify-between border-r border-[#e5e7eb]">
-                        <h4 className="text-[24px] font-medium text-black whitespace-pre-line" style={{ lineHeight: '1.2', letterSpacing: '-0.03em' }}>
+                        <h4 className="text-[24px] font-normal text-black whitespace-pre-line leading-[1.2] tracking-[-0.03em]">
                           {agent.stats[2].heading}
                         </h4>
-                        <p className="text-[14px] text-black font-medium leading-relaxed">
+                        <p className="anseru-section-description">
                           {agent.stats[2].detail}
                         </p>
                       </div>

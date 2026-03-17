@@ -90,14 +90,14 @@ export default function Integrations() {
 
         {/* TEXT SECTION */}
         <div className="text-center md:text-left flex-1">
-          <p className="text-gray-500 mb-4 text-sm font-medium uppercase tracking-wider">
+          <p className="anseru-section-tag">
             Integrations
           </p>
-          <h2 className="text-3xl md:text-[44px] font-medium text-gray-900 leading-tight tracking-tight">
+          <h2 className="anseru-section-title">
             Connect to the Tools <br className="hidden md:block" />
             You Already Use
           </h2>
-          <p className="mt-6 text-gray-600 text-base md:text-lg leading-relaxed max-w-md mx-auto md:mx-0">
+          <p className="anseru-section-description mt-6 max-w-md mx-auto md:mx-0">
             Anseru syncs effortlessly with your existing stack, pulling knowledge from where it lives and pushing answers where they're needed.
           </p>
         </div>

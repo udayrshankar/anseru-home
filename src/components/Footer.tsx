@@ -1,4 +1,4 @@
-import logo from "../assets/Anseru_3 3.png"; // We can reuse the same logo or the text one if there's a specific one. The design shows standard Anseru logo with text.
+import logo from "../assets/Vector.png"; // We can reuse the same logo or the text one if there's a specific one. The design shows standard Anseru logo with text.
 import bg151 from "../assets/151.png";
 
 export default function Footer() {
@@ -146,9 +146,6 @@ export default function Footer() {
             {/* Using the full text vector logo based on design screenshot showing standard Anseru typographic logo */}
             <div className="flex gap-2 items-center text-4xl font-medium tracking-tight text-[#f4435b]">
               <img src={logo} alt="Anseru Logo" className="h-10 w-auto object-contain" />
-              <span style={{ background: 'linear-gradient(90deg, #1C36E4, #f4435b)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', letterSpacing: '-0.03em' }}>
-                anseru
-              </span>
             </div>
           </div>
 

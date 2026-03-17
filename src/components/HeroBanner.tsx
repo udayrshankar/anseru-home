@@ -19,7 +19,7 @@ export default function HeroBanner() {
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center h-full">
           {/* Left side - Text content */}
           <div className="space-y-6 pt-20 pb-16 md:pt-28 md:pb-32 text-center md:text-left md:-ml-8 lg:-ml-12">
-            <h1 className="text-3xl md:text-4xl font-regular text-white leading-snug">
+            <h1 className="anseru-section-title text-white">
               AI Agents for RFPs and Security<br className="hidden md:block" />
               Questionnaires | Deal Intelligence<br className="hidden md:block" />
               Platform
@@ -28,7 +28,7 @@ export default function HeroBanner() {
 
           {/* Right side - Visual placeholder */}
           <div className="hidden md:flex h-full border-l border-white/20 items-end pb-10 px-10 md:pl-16 lg:pl-24">
-            <p className="text-[15px] md:text-[16px] text-white/90 leading-relaxed font-regular ml-auto whitespace-pre-line">
+            <p className="anseru-section-description text-white ml-auto whitespace-pre-line">
               Win enterprise deals faster with AI agents that automate RFP<br className="hidden md:block" />
               responses and security questionnaires. Anseru turns<br className="hidden md:block" />
               scattered deal intelligence into winning proposals for sales,<br className="hidden md:block" />

@@ -78,10 +78,10 @@ export default function Features() {
     <div className="w-full py-16 md:py-24 bg-white">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-start mb-12 md:mb-16 gap-6 md:gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-16 gap-6 md:gap-8">
           <div className="space-y-3">
-            <p className="text-[14px] md:text-[15px] font-medium text-gray-500">Platform Features</p>
-            <h2 className="text-3xl md:text-5xl font-medium text-gray-900 leading-tight tracking-tight">
+            <p className="anseru-section-tag">Platform Features</p>
+            <h2 className="anseru-section-title">
               Powerful Capabilities for<br className="hidden md:block" /> Modern Deal Teams
             </h2>
           </div>

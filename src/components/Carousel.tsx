@@ -1,5 +1,4 @@
 
-
 // Import slide images
 import slide1Img from '../assets/Intro Page.png';
 import slide2Img from '../assets/Intro Page (3).png';
@@ -7,6 +6,7 @@ import slide3Img from '../assets/Intro Page (2).png';
 import slide4Img from '../assets/Intro Page (1).png';
 import bulletIcon from '../assets/Vector (2).png';
 import noiseImage from '../assets/noise.png';
+import watermark from '../assets/Group 1437253216.png'
 
 const slideData = [
   {
@@ -14,36 +14,64 @@ const slideData = [
     title: "Connect your knowledge",
     description:
       "Anseru connects to the knowledge sources your team already uses — security documentation, compliance certifications, CRM records, call transcripts, past proposals, and internal wikis — and structures them into a living intelligence layer that improves with every deal.",
-    gradientClass: "gradient-a3",
+    gradientClass: "card-gradient-a1",
     image: slide1Img,
     bulletStyle: "starburst" as const,
+    cardSubtitle: "Ask. Find. Respond—Instantly.",
+    cardTitle: "Turn complex RFPs into clear, winning responses",
+    bullets: [
+      "Automatically indexes past RFPs, security docs, and content",
+      "Keeps responses accurate with up-to-date sources",
+      "Improves continuously as teams use the platform",
+    ],
   },
   {
     id: 1,
     title: "Upload RFPs & Security Questionnaires",
     description:
       "Anseru AI offers a centralized hub for all your knowledge sources. Upload previous RFPs, relevant documents, and Q&A from legacy tools or spreadsheets. Seamlessly integrate with internal data systems like Google Drive, SharePoint, and more, pull information directly from your website.",
-    gradientClass: "gradient-royal-blue",
+    gradientClass: "card-gradient-a2",
     image: slide2Img,
     bulletStyle: "starburst" as const,
+    cardSubtitle: "Centralized Knowledge Hub",
+    cardTitle: "Connect all your sources in one place",
+    bullets: [
+      "Upload previous RFPs and spreadsheets",
+      "Integrate with Google Drive and SharePoint",
+      "Pull information directly from company websites",
+    ],
   },
   {
     id: 2,
     title: "Generate AI Draft Responses",
     description:
       "Anseru generates accurate response drafts using your knowledge base and past answers—saving hours of manual work.",
-    gradientClass: "gradient-blue-crimson",
+    gradientClass: "card-gradient-a3",
     image: slide3Img,
     bulletStyle: "starburst" as const,
+    cardSubtitle: "AI-Powered Drafting",
+    cardTitle: "Draft accurate responses in seconds",
+    bullets: [
+      "AI-driven drafting using your private knowledge",
+      "Significant reduction in manual work",
+      "Maintain consistency across all documents",
+    ],
   },
   {
     id: 3,
     title: "SME Review & Approval",
     description:
       "Subject matter experts review, refine, and approve responses before final submission.",
-    gradientClass: "gradient-violet",
+    gradientClass: "card-gradient-a4",
     image: slide4Img,
     bulletStyle: "starburst" as const,
+    cardSubtitle: "Expert Review Loop",
+    cardTitle: "Ensure every answer is mission-ready",
+    bullets: [
+      "Streamlined workflow for expert review",
+      "Refine and approve responses in real-time",
+      "Final submission with full validation",
+    ],
   },
 ];
 
@@ -86,44 +114,18 @@ const BulletPoint = ({
   </div>
 );
 
-/* ── Circle overlay SVG for right card backgrounds ────────────── */
-
-const CircleOverlay = () => (
-  <svg
-    className="absolute -top-16 -right-16 opacity-[0.08]"
-    width="420"
-    height="420"
-    viewBox="0 0 420 420"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <circle cx="260" cy="160" r="80" stroke="white" strokeWidth="1.5" />
-    <circle cx="260" cy="160" r="140" stroke="white" strokeWidth="1.2" />
-    <circle cx="260" cy="160" r="200" stroke="white" strokeWidth="1" />
-  </svg>
-);
 
 /* ── Main component ───────────────────────────────────────────────── */
 
 export default function Carousel() {
-  const bullets = [
-    "Automatically indexes past RFPs, security docs, and content",
-    "Keeps responses accurate with up-to-date sources",
-    "Improves continuously as teams use the platform",
-  ];
-
   return (
     <div className="w-full bg-white relative">
-      {/* ── Global Header – Sticky ─────────────────────────────── */}
       <div className="z-20 pt-20 pb-10 bg-white/95 backdrop-blur-sm">
         <div className="text-center space-y-2">
-          <p className="text-[14px] font-medium capitalize tracking-wide" style={{ color: "#808080" }}>
+          <p className="anseru-section-tag">
             How It Works
           </p>
-          <h2
-            className="text-4xl md:text-[42px] font-medium leading-[1.2] tracking-tight"
-            style={{ color: "#111111" }}
-          >
+          <h2 className="anseru-section-title">
             How Anseru Turns Knowledge
             <br />
             Into Winning Deals
@@ -136,29 +138,23 @@ export default function Carousel() {
         {slideData.map((slide) => (
           <div
             key={slide.id}
-            className="w-full h-screen flex items-center justify-center snap-start px-6"
+            className="w-full h-screen flex items-center justify-center px-6"
           >
             <div className="max-w-[1300px] mx-auto w-full grid md:grid-cols-[2fr_3fr] gap-8 md:gap-12 items-center">
               {/* ── Left column ──────────────────────────────── */}
               <div className="pr-4">
                 <div className="space-y-7">
                   <div className="space-y-4">
-                    <h3
-                      className="text-[28px] md:text-[32px] font-medium leading-tight"
-                      style={{ color: "#111111" }}
-                    >
+                    <h3 className="text-[28px] md:text-[32px] font-normal leading-tight text-[#111111]">
                       {slide.title}
                     </h3>
-                    <p
-                      className="text-[15px] md:text-[16px] leading-[1.6] max-w-[95%]"
-                      style={{ color: "#666666" }}
-                    >
+                    <p className="anseru-section-description max-w-[95%]">
                       {slide.description}
                     </p>
                   </div>
 
                   <div className="space-y-4 pt-2">
-                    {bullets.map((text, i) => (
+                    {slide.bullets.map((text, i) => (
                       <BulletPoint
                         key={i}
                         text={text}
@@ -172,12 +168,10 @@ export default function Carousel() {
               {/* ── Right column – gradient card ─────────────── */}
               <div className="pr-4 md:pr-8 h-full flex items-center py-10 md:py-20">
                 <div
-                  className={`p-8 md:p-10 pb-0 text-white w-full h-[450px] md:h-[600px] flex flex-col justify-start relative overflow-hidden shadow-lg ${slide.gradientClass}`}
+                  className={`p-8 md:p-10 pb-0 text-white w-full h-[450px] md:h-[650px] flex flex-col justify-start relative overflow-hidden shadow-lg ${slide.gradientClass}`}
                 >
-                  {/* Circle overlay decoration */}
-                  <CircleOverlay />
+                  <img src={watermark} alt="" className="absolute top-0 right-0 w-[40%] h-[40%] object-contain" />
 
-                  {/* Noise / grain texture */}
                   <div
                     className="absolute inset-0 opacity-100 pointer-events-none"
                     style={{
@@ -190,19 +184,19 @@ export default function Carousel() {
                   {/* Text content */}
                   <div className="relative z-10 space-y-3 mb-10">
                     <p className="text-[12px] md:text-[14px] font-medium opacity-90 tracking-wide">
-                      Ask. Find. Respond—Instantly.
+                      {slide.cardSubtitle}
                     </p>
                     <h4 className="text-[30px] md:text-[34px] font-medium leading-[1.15] tracking-tight max-w-[320px]">
-                      Turn complex RFPs into clear, winning responses
+                      {slide.cardTitle}
                     </h4>
                   </div>
 
                   {/* Product mockup image */}
-                  <div className="relative z-10 mt-auto aspect-[494/384] rounded-t-lg overflow-hidden translate-y-12 translate-x-12">
+                  <div className="absolute z-10 mt-auto rounded-t-lg bottom-0 right-0">
                     <img
                       src={slide.image}
                       alt={slide.title}
-                      className="w-full h-full object-contain object-top rounded-lg"
+                      className="w-full h-full scale-100  object-top rounded-lg"
                     />
                   </div>
                 </div>

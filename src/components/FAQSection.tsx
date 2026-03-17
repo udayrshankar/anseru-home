@@ -55,10 +55,10 @@ export default function FAQSection() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         {/* Header */}
         <div className="mb-10">
-          <p className="text-[14px] md:text-[15px] font-medium text-gray-500 mb-3">
+          <p className="anseru-section-tag">
             FAQs
           </p>
-          <h2 className="text-3xl md:text-[40px] font-semibold text-gray-900 leading-tight tracking-tight">
+          <h2 className="anseru-section-title">
             Frequently Asked Questions
           </h2>
         </div>

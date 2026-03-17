@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { ReactNode } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 // Import your custom bullet point assets
 import salesBullet from "../assets/Group.png";
@@ -21,112 +21,107 @@ const TeamCard = ({ team }: { team: Team }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <motion.div
+    <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="group relative overflow-hidden bg-[#F8F9FB] h-[480px] md:h-[540px] flex flex-col cursor-default"
+      className="group relative h-[480px] md:h-[540px] w-full cursor-default"
+      style={{ perspective: "1000px" }}
     >
-      {/* Top Grid Lines (Enhanced) */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isHovered ? 1 : 0 }}
-        transition={{ duration: 0.4 }}
-        className="absolute inset-x-0 top-0 h-[45%] pointer-events-none"
-        style={{
-          backgroundImage: `repeating-linear-gradient(to right, #e5e7eb 0, #e5e7eb 1px, transparent 1px, transparent 20px)`,
-          maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%)",
-          WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%)",
-        }}
-      />
-
-      {/* Bottom Grid Lines (Added) */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isHovered ? 1 : 0 }}
-        transition={{ duration: 0.4 }}
-        className="absolute inset-x-0 bottom-0 h-[25%] pointer-events-none"
-        style={{
-          backgroundImage: `repeating-linear-gradient(to right, #e5e7eb 0, #e5e7eb 1px, transparent 1px, transparent 20px)`,
-          maskImage: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%)",
-          WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%)",
-        }}
-      />
-
-      {/* Gradient Side Bar */}
-      <div className={`absolute bottom-0 right-0 w-[24px] h-[55%] bg-gradient-to-b ${team.gradient}`} />
-
-      {/* Card Content */}
-      <div className="relative p-8 md:p-10 h-full w-full flex flex-col z-10">
-        <motion.div layout className="flex flex-col h-full w-full">
-          
-          {/* Invisible spacer that pushes the heading down on hover */}
-          <motion.div
-            layout
-            initial={false}
-            animate={{ height: isHovered ? "20%" : "0%" }}
-            transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
-            className="w-full shrink-0"
+        animate={{ rotateY: isHovered ? 180 : 0 }}
+        transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+        className="relative w-full h-full"
+        style={{ transformStyle: "preserve-3d" }}
+      >
+        {/* --- FRONT FACE --- */}
+        <div
+          className="absolute inset-0 w-full h-full bg-[#F8F9FB] rounded-xl overflow-hidden"
+          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+        >
+          {/* Top Grid Lines */}
+          <div
+            className="absolute inset-x-0 top-0 h-[45%] pointer-events-none opacity-50"
+            style={{
+              backgroundImage: `repeating-linear-gradient(to right, #e5e7eb 0, #e5e7eb 1px, transparent 1px, transparent 20px)`,
+              maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%)",
+              WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%)",
+            }}
           />
 
-          <motion.h3
-            layout
-            transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
-            className="text-[26px] md:text-[30px] font-medium text-[#111827] leading-[1.15] tracking-tight mb-6 origin-left"
-          >
-            {team.title}
-          </motion.h3>
+          {/* Bottom Grid Lines */}
+          <div
+            className="absolute inset-x-0 bottom-0 h-[25%] pointer-events-none opacity-30"
+            style={{
+              backgroundImage: `repeating-linear-gradient(to right, #e5e7eb 0, #e5e7eb 1px, transparent 1px, transparent 20px)`,
+              maskImage: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%)",
+              WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%)",
+            }}
+          />
 
-          <div className="relative flex-1 w-full">
-            <AnimatePresence mode="wait">
-              {!isHovered ? (
-                // --- DEFAULT STATE ---
-                <motion.div
-                  key="default"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute inset-0 flex flex-col h-full"
-                >
-                  <p className="text-[15px] text-gray-500 leading-[1.6] pr-4">
-                    {team.description}
-                  </p>
-                  <div className="flex-1 flex items-end justify-center pb-2">
-                    <div className="w-[70%] opacity-90 pb-2">
-                      {team.icon}
-                    </div>
-                  </div>
-                </motion.div>
-              ) : (
-                // --- HOVER STATE ---
-                <motion.div
-                  key="hover"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3, delay: 0.1 }}
-                  className="absolute inset-0 flex flex-col gap-6 pr-4"
-                >
-                  {team.features.map((feature, fIdx) => (
-                    <div key={fIdx} className="flex items-start gap-4">
-                      {/* Using your custom imported image assets here */}
-                      <img 
-                        src={team.bulletIcon} 
-                        alt="bullet point" 
-                        className="w-6 h-6 object-contain mt-[2px] shrink-0"
-                      />
-                      <p className="text-[15px] text-gray-600 leading-[1.5]">
-                        {feature}
-                      </p>
-                    </div>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
+          {/* Gradient Side Bar */}
+          <div className={`absolute bottom-0 right-0 w-[24px] h-[55%] bg-gradient-to-b ${team.gradient}`} />
+
+          {/* Content */}
+          <div className="relative p-8 md:p-10 h-full w-full flex flex-col z-10">
+            <h3 className="text-[26px] md:text-[30px] font-normal text-[#111827] leading-[1.15] tracking-tight mb-6">
+              {team.title}
+            </h3>
+            <p className="anseru-section-description pr-4">
+              {team.description}
+            </p>
+            <div className="flex-1 flex items-end justify-center pb-2">
+              <div className="w-[70%] opacity-90 pb-2">
+                {team.icon}
+              </div>
+            </div>
           </div>
-        </motion.div>
-      </div>
-    </motion.div>
+        </div>
+
+        {/* --- BACK FACE --- */}
+        <div
+          className="absolute inset-0 w-full h-full bg-[#F8F9FB] rounded-xl overflow-hidden"
+          style={{
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+            transform: "rotateY(180deg)",
+          }}
+        >
+          {/* Top Grid Lines */}
+          <div
+            className="absolute inset-x-0 top-0 h-[45%] pointer-events-none opacity-100"
+            style={{
+              backgroundImage: `repeating-linear-gradient(to right, #e5e7eb 0, #e5e7eb 1px, transparent 1px, transparent 20px)`,
+              maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%)",
+              WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%)",
+            }}
+          />
+
+          {/* Gradient Side Bar */}
+          <div className={`absolute bottom-0 right-0 w-[24px] h-[55%] bg-gradient-to-b ${team.gradient}`} />
+
+          {/* Content */}
+          <div className="relative p-8 md:p-10 h-full w-full flex flex-col z-10 mt-10">
+            <h3 className="text-[26px] md:text-[30px] font-normal text-[#111827] leading-[1.15] tracking-tight mb-10">
+              {team.title}
+            </h3>
+            <div className="flex flex-col gap-6 pr-4">
+              {team.features.map((feature, fIdx) => (
+                <div key={fIdx} className="flex items-start gap-4">
+                  <img
+                    src={team.bulletIcon}
+                    alt="bullet point"
+                    className="w-6 h-6 object-contain mt-[2px] shrink-0"
+                  />
+                  <p className="anseru-section-description leading-[1.5]">
+                    {feature}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 
@@ -182,7 +177,7 @@ export default function ProblemSection() {
         "Cut security review time from hours to minutes",
       ],
       icon: (
-        <svg viewBox="0 0 285 285" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+        <svg viewBox="0 0 285 285" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto scale-125">
           <path d="M142.5 178.125C162.175 178.125 178.125 162.175 178.125 142.5C178.125 122.825 162.175 106.875 142.5 106.875C122.825 106.875 106.875 122.825 106.875 142.5C106.875 162.175 122.825 178.125 142.5 178.125Z" stroke="black" strokeWidth="2.85" />
           <path d="M142.5 206.625C177.915 206.625 206.625 177.915 206.625 142.5C206.625 107.085 177.915 78.375 142.5 78.375C107.085 78.375 78.375 107.085 78.375 142.5C78.375 177.915 107.085 206.625 142.5 206.625Z" stroke="#444444" strokeWidth="2.85" />
           <path d="M142.5 235.125C193.655 235.125 235.125 193.655 235.125 142.5C235.125 91.3446 193.655 49.875 142.5 49.875C91.3446 49.875 49.875 91.3446 49.875 142.5C49.875 193.655 91.3446 235.125 142.5 235.125Z" stroke="#666666" strokeWidth="2.85" />
@@ -210,7 +205,7 @@ export default function ProblemSection() {
         "Maintain a complete audit trail for every response",
       ],
       icon: (
-        <svg viewBox="0 0 333 333" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+        <svg viewBox="0 0 333 333" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto scale-155">
           <path d="M266.4 66.5996H66.5996V266.4H266.4V66.5996Z" stroke="black" strokeWidth="2" />
           <path d="M133.199 66.5996V266.4" stroke="#666666" strokeWidth="1.665" />
           <path d="M199.801 66.5996V266.4" stroke="#666666" strokeWidth="1.665" />
@@ -223,19 +218,19 @@ export default function ProblemSection() {
   ];
 
   return (
-    <div className="w-full py-16 md:py-24 bg-white font-sans">
+    <div className="w-full py-16 bg-white font-sans">
       <div className="max-w-[1240px] mx-auto px-6">
         
         {/* Header Area */}
         <div className="mb-14 md:mb-20">
-          <p className="text-[20px] font-regular text-gray-500 text-left mb-2">
+          <p className="anseru-section-tag">
             Customer Problem
           </p>
           <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 text-left">
-            <h2 className="text-4xl md:text-[44px] font-medium text-[#111827] leading-[1.1] tracking-tight">
+            <h2 className="anseru-section-title">
               Built for Teams Handling <br className="hidden md:block" /> Complex Questionnaires
             </h2>
-            <p className="text-[16px] text-gray-500 max-w-[420px] leading-relaxed pb-1 -translate-y-1">
+            <p className="anseru-section-description max-w-[420px] pb-1 -translate-y-1">
               Sales, security, and compliance teams rely on Anseru to generate accurate responses faster.
             </p>
           </div>

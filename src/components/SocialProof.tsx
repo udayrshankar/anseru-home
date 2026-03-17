@@ -12,7 +12,7 @@ export default function SocialProof() {
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-10 md:mb-12">
-          <p className="text-[13px] md:text-sm font-medium text-gray-500 capitalize tracking-wider">
+          <p className="anseru-section-tag">
             Trusted By Industry Leaders
           </p>
         </div>

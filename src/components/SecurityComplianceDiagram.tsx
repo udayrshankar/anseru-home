@@ -9,15 +9,15 @@ export default function SecurityComplianceDiagram() {
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-28">
           <div className="max-w-[500px]">
-            <p className="text-[#6b7280] text-[18px] font-regular">
+            <p className="anseru-section-tag">
               Security And Compliance
             </p>
-            <h2 className="text-[#111827] text-4xl md:text-[44px] font-medium leading-[1.15] tracking-tight">
+            <h2 className="anseru-section-title">
               Safely connect agents to<br className="hidden md:block" /> company knowledge
             </h2>
           </div>
           <div className="max-w-[540px]">
-            <p className="text-[#6b7280] text-[16px] leading-[1.6]">
+            <p className="anseru-section-description">
               Anseru is designed to protect your company knowledge while ensuring
               every AI-drafted response remains secure, controlled, and fully traceable.
               From encrypted infrastructure and strict access controls to responsible AI

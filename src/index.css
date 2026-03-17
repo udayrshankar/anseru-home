@@ -113,6 +113,22 @@
   background: linear-gradient(90deg, #1D80F9 0%, #E74F62 100%);
 }
 
+.card-gradient-a1 {
+  background: linear-gradient(180deg, #fe3f49 0%, #49abf5 100%);
+}
+
+.card-gradient-a2 {
+  background: linear-gradient(180deg, #1f1baa 0%, #528de8 100%);
+}
+
+.card-gradient-a3 {
+  background: linear-gradient(225deg, #e34455 0%, #1b79f9 100%);
+}
+
+.card-gradient-a4 {
+  background: linear-gradient(180deg, #320a6a 0%, #5713d0 100%);
+}
+
 .text-gradient-brand {
   background: linear-gradient(90deg, #1D80F9 0%, #E74F62 100%);
   -webkit-background-clip: text;
@@ -138,4 +154,16 @@
 
 .gradient-violet {
   background: #3B0B98;
+}
+
+.anseru-section-tag {
+  @apply text-[14px] md:text-[15px] font-medium uppercase tracking-wide mb-3 block;
+}
+
+.anseru-section-title {
+  @apply text-3xl md:text-[44px] font-normal leading-[1.1] tracking-tight;
+}
+
+.anseru-section-description {
+  @apply text-[15px] md:text-[16px] leading-relaxed font-normal;
 }
