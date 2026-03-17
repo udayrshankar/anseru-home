@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
-import sudIcon from '../assets/Sud.png';
-import kgIcon from '../assets/kg.png';
+import knoxIcon from '../assets/knox.png';
+import kgIcon from '../assets/archer.png';
 import noiseImage from '../assets/noise.png';
 import frame9 from '../assets/Frame (9).png';
 import frame10 from '../assets/Frame (10).png';
@@ -8,7 +8,7 @@ import frame10 from '../assets/Frame (10).png';
 /* ── Agent data ─────────────────────────────────────────────────── */
 
 const agentData = {
-  KG: {
+  archer: {
     title: "RFP Agent",
     gradient: "linear-gradient(180deg, #201cae 0%, #6aa4ee 100%)",
     tags: ["Instant RFP breakdown", "Terminology translation", "Proposal-ready answers"],
@@ -26,11 +26,11 @@ const agentData = {
         detail: "Helps teams decide whether to\npursue..",
       },
     ],
-    switchLabel: "Meet KG",
-    switchIcon: sudIcon,
+    switchLabel: "Meet archer",
+    switchIcon: knoxIcon,
     decorativeImage: frame9,
   },
-  SUD: {
+  knox: {
     title: "Security\nQuestionnaire Agent",
     gradient: "linear-gradient(45deg, #1d80f9 0%, #e74f62 100%)",
     tags: ["Evidence-backed answers", "No contradictions", "Compliance-ready"],
@@ -48,7 +48,7 @@ const agentData = {
         detail: "Aligned with current policies and controls.",
       },
     ],
-    switchLabel: "Meet SUD",
+    switchLabel: "Meet knox",
     switchIcon: kgIcon,
     decorativeImage: frame10,
   },
@@ -57,7 +57,7 @@ const agentData = {
 /* ── Main component ─────────────────────────────────────────────── */
 
 export default function TwoAgents() {
-  const [activeAgent, setActiveAgent] = useState<'KG' | 'SUD'>('KG');
+  const [activeAgent, setActiveAgent] = useState<'archer' | 'knox'>('archer');
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const handleScroll = () => {
@@ -65,19 +65,18 @@ export default function TwoAgents() {
     const scrollPosition = scrollContainerRef.current.scrollLeft;
     const slideWidth = scrollContainerRef.current.clientWidth;
     const newIndex = Math.round(scrollPosition / slideWidth);
-    const newAgent = newIndex === 0 ? 'KG' : 'SUD';
+    const newAgent = newIndex === 0 ? 'archer' : 'knox';
     if (newAgent !== activeAgent) setActiveAgent(newAgent);
   };
 
   useEffect(() => {
-    // Component uses native horizontal scrolling with snap-x.
   }, []);
 
-  const scrollToAgent = (agent: 'KG' | 'SUD') => {
+  const scrollToAgent = (agent: 'archer' | 'knox') => {
     if (!scrollContainerRef.current) return;
     const slideWidth = scrollContainerRef.current.clientWidth;
     scrollContainerRef.current.scrollTo({
-      left: agent === 'KG' ? 0 : slideWidth,
+      left: agent === 'archer' ? 0 : slideWidth,
       behavior: "smooth",
     });
   };
@@ -98,37 +97,37 @@ export default function TwoAgents() {
           {/* Tab buttons */}
           <div className="flex items-center gap-1 bg-gray-100 p-1 rounded-xl">
             <button
-              onClick={() => scrollToAgent('KG')}
+              onClick={() => scrollToAgent('archer')}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-[16px] transition-all cursor-pointer ${
-                activeAgent === 'KG'
+                activeAgent === 'archer'
                   ? 'bg-black text-white'
                   : 'bg-transparent text-black hover:bg-gray-200'
               }`}
             >
-              Meet KG
+              Meet archer
               <img
-                src={sudIcon}
-                alt="KG"
+                src={knoxIcon}
+                alt="archer"
                 width="16"
                 height="16"
-                className={activeAgent === 'KG' ? '' : 'invert-0'}
+                className={activeAgent === 'archer' ? '' : 'invert-0'}
               />
             </button>
             <button
-              onClick={() => scrollToAgent('SUD')}
+              onClick={() => scrollToAgent('knox')}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-[16px] transition-all cursor-pointer ${
-                activeAgent === 'SUD'
+                activeAgent === 'knox'
                   ? 'bg-black text-white'
                   : 'bg-transparent text-black hover:bg-gray-200'
               }`}
             >
-              Meet SUD
+              Meet knox
               <img
                 src={kgIcon}
-                alt="SUD"
+                alt="knox"
                 width="16"
                 height="16"
-                className={activeAgent === 'SUD' ? 'brightness-0 invert' : ''}
+                className={activeAgent === 'knox' ? 'brightness-0 invert' : ''}
               />
             </button>
           </div>
@@ -232,7 +231,7 @@ export default function TwoAgents() {
                       {/* Bottom Right – Switch button */}
                       <div className="p-8 md:p-10 flex flex-col justify-end items-end">
                         <button
-                          onClick={() => scrollToAgent(key === 'KG' ? 'SUD' : 'KG')}
+                          onClick={() => scrollToAgent(key === 'archer' ? 'knox' : 'archer')}
                           className="flex items-center gap-2 bg-black text-white text-[14px] font-medium px-5 py-2.5 rounded-lg hover:bg-gray-800 transition cursor-pointer"
                         >
                           {agent.switchLabel}
