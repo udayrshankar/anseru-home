@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import logo from "../assets/Vector.png";
 
 export default function Navbar() {

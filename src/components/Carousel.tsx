@@ -279,7 +279,7 @@ export default function Carousel() {
 
           {/* corousel bars */}
           <div className="fixed left-1/11 top-[293%] -translate-y-1/2 flex flex-col gap-3 z-30">
-            {slideData.map((slide, index) => (
+            {slideData.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goTo(index)}
