@@ -128,7 +128,7 @@ const AgentCard = ({ agent }: { agent: typeof agentData.archer }) => {
           {agent.stats.map((stat, i) => (
             <div
               key={i}
-              className={`p-5 flex flex-col justify-between
+              className={`p-6 sm:p-8 min-h-[180px] flex flex-col justify-between
                 ${i < 2 ? "border-b" : ""}
                 ${i % 2 === 0 ? "border-r" : ""}
                 border-[#e5e7eb]`}
