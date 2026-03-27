@@ -177,7 +177,7 @@ export default function TwoAgents() {
           <div className="flex items-center gap-1 bg-gray-100 p-1 rounded-xl">
             <button
               onClick={() => goTo(0)}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-[16px] transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-lg font-medium text-sm md:text-[16px] transition-all cursor-pointer ${
                 activeAgent === "archer"
                   ? "bg-black text-white"
                   : "bg-transparent text-black hover:bg-gray-200"
@@ -189,7 +189,7 @@ export default function TwoAgents() {
 
             <button
               onClick={() => goTo(1)}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-[16px] transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-lg font-medium text-sm md:text-[16px] transition-all cursor-pointer ${
                 activeAgent === "knox"
                   ? "bg-black text-white"
                   : "bg-transparent text-black hover:bg-gray-200"
@@ -208,7 +208,7 @@ export default function TwoAgents() {
         </div>
       </div>
 
-      <div className="sticky top-10 h-auto my-10 w-full flex flex-col justify-center overflow-hidden">
+      <div className="sticky top-[72px] md:top-10 h-auto my-10 w-full flex flex-col justify-center overflow-hidden">
         <div className="max-w-[1200px] mx-auto px-6 w-full ">
           <div className="border border-black/30 rounded-xl overflow-hidden">
             <motion.div

@@ -17,7 +17,7 @@ export default function Footer() {
           />
 
           {/* Glass Card */}
-          <div className="relative z-10 bg-white/10 border border-white/20 rounded-xl p-10 space-y-5 w-full max-w-[480px] shadow-2xl translate-x-30">
+          <div className="relative z-10 bg-white/10 border border-white/20 rounded-xl p-10 space-y-5 w-full max-w-[480px] shadow-2xl md:translate-x-30">
             {[
               "Autonomous Deal Agents",
               "Living Knowledge Engine",
@@ -61,7 +61,7 @@ export default function Footer() {
       <div className="w-full bg-[#f4f4f4] border-t border-gray-200 py-20 px-10 md:px-14 flex flex-col items-center justify-center text-center gap-8">
         <h2
           style={{letterSpacing : "0.15px", wordSpacing: "3px"}}
-          className="font-regular text-2xl md:text-5xl max-w-none whitespace-nowrap"
+          className="font-regular text-xl sm:text-2xl md:text-4xl lg:text-5xl max-w-[900px]"
         >
           Deal Intelligent Infrastructure for Modern Sales teams
         </h2>

@@ -343,11 +343,11 @@ export default function Carousel() {
                 key={slide.id}
                 className="w-[100vw] snap-center snap-always flex-shrink-0"
               >
-                <div className="max-w-[1300px] mx-auto w-full px-6">
+                <div className="max-w-[1300px] mx-auto w-full px-4 md:px-6">
                   <div className="grid md:grid-cols-[2fr_3fr] gap-8 md:gap-12 items-stretch">
                     {/* ── Left column ──────────────────────────────── */}
                     <div className="pr-4 flex flex-row h-full py-2 md:py-10">
-                      <div className="flex w-[20px] md:w-[30px] flex-shrink-0 mr-4 md:mr-6"></div>
+                      <div className="hidden md:flex w-[30px] flex-shrink-0 mr-6"></div>
                       <motion.div
                         className="flex flex-col flex-grow"
                         initial={false}

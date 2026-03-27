@@ -115,7 +115,7 @@ export default function RFPWorkflow() {
       
       {/* ── Header ── */}
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="flex justify-between items-end mt-4">
+        <div className="flex flex-col md:flex-row justify-between md:items-end mt-4 gap-6">
           <div>
             <p className="anseru-section-tag">
               The Future Of RFP Responses
@@ -124,7 +124,7 @@ export default function RFPWorkflow() {
               From RFP to<br />Winning Proposal
             </h2>
           </div>
-          <p className="max-w-[440px] text-[15px] text-gray-500 leading-[1.65] pt-2">
+          <p className="max-w-[440px] text-[15px] text-gray-500 leading-[1.65] md:pt-2">
             Anseru orchestrates the entire response lifecycle with AI agents analyzing requirements,
             generating drafts, and enabling teams to refine and deliver high-quality proposals with speed and precision.
           </p>
