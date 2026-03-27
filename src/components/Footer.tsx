@@ -77,7 +77,7 @@ export default function Footer() {
       {/* ── FOOTER BOTTOM ───────────────────────────────── */}
       <footer className="w-full bg-[#f4f4f4]">
         {/* Logo */}
-        <div className="flex justify-center">
+        <div className="flex justify-center mb-5">
           <img src={logo} alt="Anseru Logo" className="h-10 object-contain" />
         </div>
 

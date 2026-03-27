@@ -111,7 +111,7 @@ export default function RFPWorkflow() {
   const innerEnd = polarToCartesian(CX, CY, 250, 206);
 
   return (
-    <div className="w-full min-h-screen " style={{ fontFamily: "Inter, sans-serif" }}>
+    <div className="w-full md:min-h-screen " style={{ fontFamily: "Inter, sans-serif" }}>
       
       {/* ── Header ── */}
       <div className="max-w-[1200px] mx-auto px-6">

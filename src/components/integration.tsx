@@ -36,8 +36,20 @@ export default function Integrations() {
     <section className="py-16 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row gap-12 md:gap-24 items-center">
         
-        {/* FRAME CONTAINER */}
-        <div className="w-full max-w-[420px] aspect-square bg-gray-50 rounded-3xl overflow-hidden flex items-center justify-center relative pointer-events-none">
+        {/* TEXT SECTION – order-first on mobile, order-last on md */}
+        <div className="text-center md:text-left flex-1 order-first md:order-last">
+          <p className="anseru-section-tag">
+            Integrations
+          </p>
+          <h2 className="anseru-section-title">
+            Connect to the Tools <br className="hidden md:block" />
+            You Already Use
+          </h2>
+         
+        </div>
+
+        {/* FRAME CONTAINER – order-last on mobile, order-first on md */}
+        <div className="w-full max-w-[420px] aspect-square bg-gray-50 rounded-3xl overflow-hidden flex items-center justify-center relative pointer-events-none order-last md:order-first">
           
           {/* Top & Bottom fade gradients for a polished look */}
           <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-white to-transparent z-10" />
@@ -86,18 +98,6 @@ export default function Integrations() {
             </div>
 
           </div>
-        </div>
-
-        {/* TEXT SECTION */}
-        <div className="text-center md:text-left flex-1">
-          <p className="anseru-section-tag">
-            Integrations
-          </p>
-          <h2 className="anseru-section-title">
-            Connect to the Tools <br className="hidden md:block" />
-            You Already Use
-          </h2>
-         
         </div>
 
       </div>

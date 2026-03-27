@@ -279,7 +279,7 @@ export default function Carousel() {
           </h2>
 
           {/* corousel bars */}
-          <div className="fixed left-1/11 top-[250%] -translate-y-1/2 flex flex-col gap-3 z-30">
+          <div className="hidden md:flex fixed left-1/11 top-[250%] -translate-y-1/2 flex-col gap-3 z-30">
             {slideData.map((_, index) => (
               <button
                 key={index}
@@ -319,7 +319,7 @@ export default function Carousel() {
                   {indicator}
                 </button>
                 {index < indicators.length - 1 && (
-                  <div className="w-12 h-[1px] bg-gray-200 -mx-2" />
+                  <div className="w-5 h-[1px] bg-gray-200 -mx-2" />
                 )}
               </div>
             ))}

@@ -18,7 +18,7 @@ export default function HeroBanner() {
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center h-full">
           {/* Left side - Text content */}
-          <div className="space-y-6 pt-20 pb-16 md:pt-28 md:pb-32 text-center md:text-left md:-ml-8 lg:-ml-12">
+          <div className="space-y-6 pt-30 pb-16 md:pt-28 md:pb-32 text-center md:text-left md:-ml-8 lg:-ml-12">
             <h1 className="anseru-section-title text-white">
               AI Agents for RFPs and Security
               <br className="hidden md:block" />

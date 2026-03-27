@@ -20,10 +20,18 @@ interface Team {
 const TeamCard = ({ team }: { team: Team }) => {
   const [isHovered, setIsHovered] = useState(false);
 
+  const handleMouseEnter = () => {
+    // Only flip on true pointer (mouse), not touch-emulated events
+    if (window.matchMedia("(hover: hover)").matches) {
+      setIsHovered(true);
+    }
+  };
+  const handleMouseLeave = () => setIsHovered(false);
+
   return (
     <div
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       className="group relative h-[480px] md:h-[540px] w-full cursor-default"
       style={{ perspective: "1000px" }}
     >
@@ -36,7 +44,7 @@ const TeamCard = ({ team }: { team: Team }) => {
         {/* --- FRONT FACE --- */}
         <div
           className="absolute inset-0 w-full h-full bg-[#F8F9FB] overflow-hidden"
-          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", willChange: "transform" }}
         >
           {/* Top Grid Lines */}
           <div
@@ -84,6 +92,7 @@ const TeamCard = ({ team }: { team: Team }) => {
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
+            willChange: "transform",
           }}
         >
           {/* Top Grid Lines */}
