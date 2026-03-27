@@ -77,7 +77,7 @@ const agentData = {
 };
 
 /** Single agent card used by the mobile tab view */
-const AgentCard = ({ agent, agentKey }: { agent: typeof agentData.archer; agentKey: string }) => {
+const AgentCard = ({ agent }: { agent: typeof agentData.archer }) => {
   const headingclass = "anseru-card-title";
   const detailclass = "anseru-section-tag";
 
@@ -273,9 +273,9 @@ export default function TwoAgents() {
           </div>
 
           {activeAgent === "archer" ? (
-            <AgentCard agent={agentData.archer} agentKey="archer" />
+            <AgentCard agent={agentData.archer} />
           ) : (
-            <AgentCard agent={agentData.knox} agentKey="knox" />
+            <AgentCard agent={agentData.knox} />
           )}
         </div>
       </div>
