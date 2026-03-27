@@ -26,12 +26,24 @@ const TeamCard = ({ team }: { team: Team }) => {
       setIsHovered(true);
     }
   };
-  const handleMouseLeave = () => setIsHovered(false);
+  const handleMouseLeave = () => {
+    if (window.matchMedia("(hover: hover)").matches) {
+      setIsHovered(false);
+    }
+  };
+
+  const handleClick = () => {
+    // On touch devices, toggle flip on tap
+    if (!window.matchMedia("(hover: hover)").matches) {
+      setIsHovered(!isHovered);
+    }
+  };
 
   return (
     <div
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
       className="group relative h-[480px] md:h-[540px] w-full cursor-default"
       style={{ perspective: "1000px" }}
     >

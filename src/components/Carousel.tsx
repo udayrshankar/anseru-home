@@ -378,7 +378,7 @@ export default function Carousel() {
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-2 mt-25 w-full md:w-[80%] shrink-0 opacity-0 pointer-events-none translate-y-[10px]">
+                        <div className="hidden md:flex items-center gap-2 mt-25 w-full md:w-[80%] shrink-0 opacity-0 pointer-events-none translate-y-[10px]">
                           <div className="h-[3px] w-full" />
                         </div>
                       </motion.div>

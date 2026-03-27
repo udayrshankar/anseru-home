@@ -100,7 +100,7 @@ const AgentCard = ({ agent }: { agent: typeof agentData.archer }) => {
             <img src={agent.decorativeImage} alt="" className="w-28 h-auto opacity-90" />
           </div>
           <div className="relative mt-auto">
-            <h3 className="anseru-card-title text-white mb-4">{agent.title}</h3>
+            <h3 className="anseru-card-title text-white mb-4 whitespace-pre-line leading-[1.3] md:leading-tight">{agent.title}</h3>
             <div className="flex flex-wrap gap-2">
               {agent.tags.map((tag, i) => (
                 <span
@@ -220,7 +220,7 @@ export default function TwoAgents() {
 
   /* ── Tab button shared between mobile and desktop ── */
   const TabButtons = ({ onClickArcher, onClickKnox }: { onClickArcher: () => void; onClickKnox: () => void }) => (
-    <div className="flex items-center gap-1 bg-gray-100 p-1 rounded-xl">
+    <div className="inline-flex w-fit items-center gap-1 bg-gray-100 p-1 rounded-xl">
       <button
         onClick={onClickArcher}
         className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-lg font-medium text-sm md:text-[16px] transition-all cursor-pointer ${
@@ -255,10 +255,6 @@ export default function TwoAgents() {
 
   return (
     <>
-      {/* ══════════════════════════════════════════════════════════
-          MOBILE / TABLET VIEW  (hidden on lg+)
-          Simple tab switch — no scroll jacking, no horizontal slide
-      ══════════════════════════════════════════════════════════ */}
       <div className="lg:hidden w-full bg-white pb-7 px-4 sm:px-6">
         <div className="max-w-[1200px] mx-auto w-full">
           <div className="flex flex-col gap-4 mb-6">
@@ -280,10 +276,6 @@ export default function TwoAgents() {
         </div>
       </div>
 
-      {/* ══════════════════════════════════════════════════════════
-          DESKTOP VIEW  (hidden below lg)
-          Original scroll-driven horizontal slide (200vh)
-      ══════════════════════════════════════════════════════════ */}
       <div ref={targetRef} className="hidden lg:block w-full bg-white pb-7 relative h-[200vh]">
         <div className="max-w-[1200px] mx-auto px-6 w-full">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
@@ -328,7 +320,7 @@ export default function TwoAgents() {
                           <img src={agent.decorativeImage} alt="" className="w-36 h-auto opacity-90" />
                         </div>
                         <div className="relative mt-auto">
-                          <h3 className="anseru-card-title text-white mb-4">{agent.title}</h3>
+                          <h3 className="anseru-card-title text-white mb-4 whitespace-pre-line leading-[1.3] md:leading-tight">{agent.title}</h3>
                           <div className="flex flex-wrap gap-2.5">
                             {agent.tags.map((tag, i) => (
                               <span

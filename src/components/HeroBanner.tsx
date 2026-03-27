@@ -29,7 +29,7 @@ export default function HeroBanner() {
           </div>
 
           {/* Right side - Visual placeholder */}
-          <div className="hidden md:flex h-full border-l border-white/20 items-end pb-10 px-10 md:pl-16 lg:pl-24">
+          <div className="flex h-full md:border-l border-white/20 items-end pb-10 md:px-10 md:pl-16 lg:pl-24">
             <p className="text-white mx-auto whitespace-pre-line max-w-104">
               We are a vertical AI-Native B2B SaaS Platform that helps Modern
               Sales Teams win deals faster using AI Agents to draft
