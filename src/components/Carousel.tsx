@@ -1,7 +1,12 @@
-import { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef, useCallback, useEffect } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValueEvent,
+  useSpring,
+} from "framer-motion";
 
-// Import slide images
 import slide1Img from "../assets/Intro Page.png";
 import slide2Img from "../assets/Intro Page (3).png";
 import slide3Img from "../assets/Intro Page (8).png";
@@ -109,353 +114,307 @@ const slideData = [
   },
 ];
 
-/* ── Icons ────────────────────────────────────────────────────────── */
+const SLIDE_COUNT = slideData.length;
+const INDICATORS = ["Connect", "Upload", "Respond", "Approve"];
 
-const BulletImageIcon = () => (
-  <img
-    src={bulletIcon}
-    alt=""
-    width="14"
-    height="14"
-    className="flex-shrink-0 opacity-60"
-  />
-);
+// Minimum accumulated scroll (px) required to trigger a slide change.
+// Raise this number to make it less sensitive.
+const SCROLL_THRESHOLD = 80;
 
+/* ── Starburst icon ─────────────────────────────────────────────── */
 const StarburstIcon = () => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 28 26"
-    fill="none"
-    className="flex-shrink-0"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M14 0L14.1938 11.3187C14.2016 11.774 14.7911 12.0007 15.1434 11.6839L23.8995 3.80761L15.4174 11.9384C15.0762 12.2654 15.3203 12.8129 15.8106 12.8201L28 13L15.8106 13.1799C15.3203 13.1872 15.0762 13.7346 15.4174 14.0617L23.8995 22.1924L15.1434 14.3161C14.7911 13.9993 14.2016 14.226 14.1938 14.6813L14 26L13.8063 14.6813C13.7985 14.226 13.2089 13.9993 12.8567 14.3161L4.1005 22.1924L12.5827 14.0617C12.9239 13.7346 12.6797 13.1872 12.1894 13.1799L0 13L12.1894 12.8201C12.6797 12.8129 12.9239 12.2654 12.5827 11.9384L4.1005 3.80761L12.8567 11.6839C13.2089 12.0007 13.7985 11.774 13.8063 11.3187L14 0Z"
-      fill="#a1a1aa"
-    />
+  <svg width="18" height="18" viewBox="0 0 28 26" fill="none" className="flex-shrink-0 mt-0.5" xmlns="http://www.w3.org/2000/svg">
+    <path d="M14 0L14.1938 11.3187C14.2016 11.774 14.7911 12.0007 15.1434 11.6839L23.8995 3.80761L15.4174 11.9384C15.0762 12.2654 15.3203 12.8129 15.8106 12.8201L28 13L15.8106 13.1799C15.3203 13.1872 15.0762 13.7346 15.4174 14.0617L23.8995 22.1924L15.1434 14.3161C14.7911 13.9993 14.2016 14.226 14.1938 14.6813L14 26L13.8063 14.6813C13.7985 14.226 13.2089 13.9993 12.8567 14.3161L4.1005 22.1924L12.5827 14.0617C12.9239 13.7346 12.6797 13.1872 12.1894 13.1799L0 13L12.1894 12.8201C12.6797 12.8129 12.9239 12.2654 12.5827 11.9384L4.1005 3.80761L12.8567 11.6839C13.2089 12.0007 13.7985 11.774 13.8063 11.3187L14 0Z" fill="#a1a1aa" />
   </svg>
 );
 
-/* ── Bullet point ─────────────────────────────────────────────────── */
-
-const BulletPoint = ({
-  text,
-  style,
-}: {
-  text: string;
-  style: "cross" | "starburst";
-}) => (
-  <div className="flex gap-3 items-center">
-    {style === "cross" ? <BulletImageIcon /> : <StarburstIcon />}
-    <span className="text-[#666666] text-[14px] md:text-[15px] font-normal leading-relaxed">
-      {text}
-    </span>
+/* ── Bullet point ───────────────────────────────────────────────── */
+const BulletPoint = ({ text, style }: { text: string; style: "cross" | "starburst" }) => (
+  <div className="flex gap-3 items-start">
+    {style === "cross"
+      ? <img src={bulletIcon} alt="" width="14" height="14" className="flex-shrink-0 opacity-60 mt-1" />
+      : <StarburstIcon />}
+    <span className="text-[#666666] text-[14px] md:text-[15px] font-normal leading-relaxed">{text}</span>
   </div>
 );
 
-/* ── Main component ───────────────────────────────────────────────── */
+/* ── Step indicator pills ───────────────────────────────────────── */
+const StepIndicators = ({ activeSlide, onGoTo }: { activeSlide: number; onGoTo: (i: number) => void }) => (
+  <div className="flex justify-center items-center gap-0 max-w-[580px] mx-auto px-4">
+    {INDICATORS.map((label, i) => (
+      <div key={i} className="flex items-center">
+        <button
+          onClick={() => onGoTo(i)}
+          className={`text-[13px] sm:text-[15px] font-medium transition-colors cursor-pointer px-3 sm:px-4 py-2 rounded-full ${
+            activeSlide === i ? "text-black bg-gray-100" : "text-gray-400 hover:text-gray-600"
+          }`}
+        >
+          {label}
+        </button>
+        {i < INDICATORS.length - 1 && (
+          <div className="w-5 sm:w-10 h-[1px] bg-gray-200 -mx-1 sm:-mx-2" />
+        )}
+      </div>
+    ))}
+  </div>
+);
 
-export default function Carousel() {
+/* ── Gradient card ──────────────────────────────────────────────── */
+const GradientCard = ({ slide, className = "" }: { slide: typeof slideData[0]; className?: string }) => (
+  <div className={`text-white w-full flex flex-col justify-start relative overflow-hidden shadow-lg rounded-[10px] ${slide.gradientClass} ${className}`}>
+    <img src={watermark} alt="" className="absolute top-0 right-0 w-[40%] h-[40%] object-contain pointer-events-none z-10" />
+    <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: `url(${noiseImage})`, backgroundSize: "200px 200px", mixBlendMode: "overlay" }} />
+    <div className="relative z-20 p-6 md:p-8 pb-0 space-y-2">
+      <p className="text-[11px] md:text-[13px] font-medium tracking-wide">
+        {slide.cardSubtitle.map((item, idx) => (
+          <span key={idx} className={item.isBold ? "font-bold text-white" : "font-normal opacity-60"}>{item.text}</span>
+        ))}
+      </p>
+      <h2 className="font-medium max-w-[340px] text-[17px] md:text-[21px] leading-snug">{slide.cardTitle}</h2>
+    </div>
+    <div className="absolute z-10 top-40 right-0 flex justify-end">
+      <img src={slide.image} alt={slide.title} className={`h-auto w-[50%] object-top rounded-b-[10px] ${slide.id >= 2 ? "w-[85%]" : "w-[75%]"}`} />
+    </div>
+  </div>
+);
+
+/* ── Slide text ─────────────────────────────────────────────────── */
+const SlideText = ({ slide }: { slide: typeof slideData[0] }) => (
+  <div className="space-y-5">
+    <div className="space-y-3">
+      <h2 className="font-normal text-[#111111] text-[19px] md:text-[23px] leading-snug">{slide.title}</h2>
+      <p className="anseru-section-description text-[14px] md:text-[15px] leading-relaxed max-w-[95%]">{slide.description}</p>
+    </div>
+    <div className="space-y-3 pt-1">
+      {slide.bullets.map((text, i) => <BulletPoint key={i} text={text} style={slide.bulletStyle} />)}
+    </div>
+  </div>
+);
+
+/* ══════════════════════════════════════════════════════════════════
+   MOBILE  –  native horizontal snap scroll
+══════════════════════════════════════════════════════════════════ */
+const MobileCarousel = () => {
   const [activeSlide, setActiveSlide] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  const isSnappingRef = useRef(false);
+  const goTo = (i: number) => {
+    const container = scrollRef.current;
+    if (!container) return;
+    container.scrollTo({ left: i * container.clientWidth, behavior: "smooth" });
+  };
 
-  // Indicators mapping
-  const indicators = ["Connect", "Upload", "Respond", "Approve"];
-
-  // Handle scroll to update active slide
   useEffect(() => {
-    const handleScroll = () => {
-      if (!scrollContainerRef.current) return;
-      const { scrollLeft, clientWidth } = scrollContainerRef.current;
-      // Calculate which slide is most visible
-      const newActiveSlide = Math.round(scrollLeft / clientWidth);
-      if (newActiveSlide !== activeSlide) {
-        setActiveSlide(newActiveSlide);
-      }
+    const container = scrollRef.current;
+    if (!container) return;
+    const onScroll = () => {
+      const idx = Math.round(container.scrollLeft / container.clientWidth);
+      setActiveSlide(idx);
     };
+    container.addEventListener("scroll", onScroll, { passive: true });
+    return () => container.removeEventListener("scroll", onScroll);
+  }, []);
 
-    const container = scrollContainerRef.current;
-    if (container) {
-      container.addEventListener("scroll", handleScroll, { passive: true });
-      return () => container.removeEventListener("scroll", handleScroll);
-    }
-  }, [activeSlide]);
+  return (
+    <div className="w-full bg-white pb-10">
+      <div className="pt-6 pb-4 px-4 text-center">
+        <p className="anseru-section-tag">How It Works</p>
+        <h2 className="anseru-section-title mt-1 mb-5 px-2">
+          How Anseru Turns Knowledge Into Winning Deals
+        </h2>
+        <StepIndicators activeSlide={activeSlide} onGoTo={goTo} />
+      </div>
+
+      <div
+        ref={scrollRef}
+        className="flex overflow-x-auto snap-x snap-mandatory"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}
+      >
+        {slideData.map((slide) => (
+          <div key={slide.id} className="flex-shrink-0 snap-center snap-always w-[100vw] px-4 sm:px-6">
+            <SlideText slide={slide} />
+            <div className="mt-5 h-[300px] sm:h-[360px]">
+              <GradientCard slide={slide} className="h-full" />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex justify-center gap-2 mt-6">
+        {slideData.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            className={`rounded-full transition-all duration-300 ${
+              activeSlide === i ? "w-5 h-2 bg-gray-700" : "w-2 h-2 bg-gray-300"
+            }`}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/* ══════════════════════════════════════════════════════════════════
+   DESKTOP  –  scroll-driven horizontal slide, with delta accumulator
+               so small / fast trackpad flicks don't skip slides
+══════════════════════════════════════════════════════════════════ */
+const DesktopCarousel = () => {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const targetRef = useRef<HTMLDivElement>(null);
+  const isSnappingRef = useRef(false);
+  // Accumulated scroll delta – resets after each slide change
+  const accDeltaRef = useRef(0);
+  // Timestamp of last wheel event used to detect pauses and reset accumulator
+  const lastWheelTimeRef = useRef(0);
+
+  const { scrollYProgress } = useScroll({ target: targetRef, offset: ["start start", "end end"] });
+  const slideIndexSpring = useSpring(0, { stiffness: 260, damping: 32, mass: 0.6 });
+  const xOffset = useTransform(slideIndexSpring, [0, 1], ["0%", `-${((SLIDE_COUNT - 1) / SLIDE_COUNT) * 100}%`]);
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    slideIndexSpring.set(latest);
+    const idx = Math.round(latest * (SLIDE_COUNT - 1));
+    setActiveSlide((prev) => (idx !== prev ? idx : prev));
+  });
+
+  const goTo = useCallback((index: number) => {
+    if (!targetRef.current) return;
+    accDeltaRef.current = 0;
+    isSnappingRef.current = true;
+    window.scrollTo({ top: targetRef.current.offsetTop + index * window.innerHeight, behavior: "smooth" });
+    setTimeout(() => { isSnappingRef.current = false; }, 800);
+  }, []);
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
-      const container = scrollContainerRef.current;
-      if (!container || isSnappingRef.current) return;
+      if (!targetRef.current || isSnappingRef.current) return;
+      if (!window.matchMedia("(hover: hover)").matches) return;
 
-      const navbar = document.getElementById("navbar");
-      const navbarHeight = navbar?.offsetHeight || 80;
+      const offsetTop = targetRef.current.offsetTop;
+      const scrollY = window.scrollY;
+      const vh = window.innerHeight;
+      const totalH = targetRef.current.clientHeight;
 
-      const { scrollLeft, clientWidth, scrollWidth } = container;
+      // Only intercept while inside the section
+      if (scrollY < offsetTop || scrollY > offsetTop + totalH - vh) return;
 
-      const rect = container.getBoundingClientRect();
-
-      //VISIBILITY
-      const visibleHeight =
-        Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
-
-      const visibilityRatio = visibleHeight / rect.height;
-
-      const currentIndex = Math.round(scrollLeft / clientWidth);
-      const maxIndex = Math.floor(scrollWidth / clientWidth) - 1;
-
-      const scrollingDown = e.deltaY > 0;
-      const scrollingUp = e.deltaY < 0;
-
-      // WHEN TO LOCK (this is the main fix)
-      const shouldLock =
-        visibilityRatio >= 0.99 && rect.top <= navbarHeight + 10;
-
-      if (!shouldLock) {
-        return; // allow normal scroll
-      }
-
-      // LOCK IMMEDIATELY
       e.preventDefault();
 
-      document.body.style.overflow = "hidden";
+      const now = Date.now();
 
-      // EDGE EXIT (after locking decision)
-      if (
-        (currentIndex === 0 && scrollingUp) ||
-        (currentIndex === maxIndex && scrollingDown)
-      ) {
-        document.body.style.overflow = "";
-        return;
+      // If the user paused scrolling for >300 ms, reset the accumulator so
+      // they have to build up momentum again from zero.
+      if (now - lastWheelTimeRef.current > 300) {
+        accDeltaRef.current = 0;
       }
+      lastWheelTimeRef.current = now;
 
-      let nextIndex = currentIndex;
+      accDeltaRef.current += e.deltaY;
 
-      if (scrollingDown) nextIndex++;
-      if (scrollingUp) nextIndex--;
+      // Only advance a slide once the accumulated delta exceeds the threshold
+      if (Math.abs(accDeltaRef.current) < SCROLL_THRESHOLD) return;
 
-      nextIndex = Math.max(0, Math.min(nextIndex, maxIndex));
+      const direction = accDeltaRef.current > 0 ? 1 : -1;
+      accDeltaRef.current = 0; // reset after triggering
+
+      const currentIndex = Math.round((scrollY - offsetTop) / vh);
+      const nextIndex = Math.max(0, Math.min(currentIndex + direction, SLIDE_COUNT - 1));
+
+      if (nextIndex === currentIndex) return;
 
       isSnappingRef.current = true;
-
-      container.scrollTo({
-        left: nextIndex * clientWidth,
-        behavior: "smooth",
-      });
-
-      setTimeout(() => {
-        isSnappingRef.current = false;
-        document.body.style.overflow = "";
-      }, 600);
+      window.scrollTo({ top: offsetTop + nextIndex * vh, behavior: "smooth" });
+      setTimeout(() => { isSnappingRef.current = false; }, 800);
     };
 
     window.addEventListener("wheel", handleWheel, { passive: false });
-
-    return () => {
-      window.removeEventListener("wheel", handleWheel);
-    };
+    return () => window.removeEventListener("wheel", handleWheel);
   }, []);
 
-  const goTo = (index: number) => {
-    if (!scrollContainerRef.current) return;
-    const clientWidth = scrollContainerRef.current.clientWidth;
-    scrollContainerRef.current.scrollTo({
-      left: clientWidth * index,
-      behavior: "smooth",
-    });
-  };
-
   return (
-    <div className="w-full bg-white relative pt-8 pb-10">
-      {/* Header */}
-      <div className="z-20 pt-15 pb-5 bg-white/95 backdrop-blur-sm shrink-0">
-        <div className="text-center space-y-2">
-          <p className="anseru-section-tag">How It Works</p>
-          <h2 className="anseru-section-title mb-8">
-            How Anseru Turns Knowledge
-            <br />
-            Into Winning Deals
-          </h2>
+    <div ref={targetRef} className="relative w-full bg-white" style={{ height: `${SLIDE_COUNT * 100}vh` }}>
+      <div className="sticky top-0 w-full bg-white overflow-hidden" style={{ height: "100vh" }}>
 
-          {/* corousel bars */}
-          <div className="hidden md:flex fixed left-1/11 top-[250%] -translate-y-1/2 flex-col gap-3 z-30">
+        {/* Header */}
+        <div className="relative z-20 pt-6 pb-2">
+          <div className="absolute left-5 xl:left-8 top-1/2 -translate-y-1/2 flex flex-col gap-2.5 z-30">
             {slideData.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goTo(index)}
-                className={`flex flex-col items-center gap-1.5 group`}
-                aria-label={`Go to slide ${index + 1}`}
-              >
-                <div
-                  className={`w-1 bg-gray-200 rounded-full overflow-hidden relative transition-all duration-500 ${
-                    activeSlide === index ? "h-[120px]" : "h-[72px]"
-                  }`}
-                >
-                  <div
-                    className={`absolute top-0 left-0 w-full rounded-full transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                      activeSlide === index
-                        ? "h-full bg-gray-600"
-                        : "h-0 bg-gray-300"
-                    }`}
-                  />
+              <button key={index} onClick={() => goTo(index)} aria-label={`Slide ${index + 1}`}>
+                <div className={`w-[3px] bg-gray-200 rounded-full overflow-hidden relative transition-all duration-500 ${activeSlide === index ? "h-[100px]" : "h-[56px]"}`}>
+                  <div className={`absolute top-0 left-0 w-full rounded-full transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${activeSlide === index ? "h-full bg-gray-600" : "h-0"}`} />
                 </div>
               </button>
             ))}
           </div>
 
-          {/* Indicators */}
-          <div className="flex justify-center items-center gap-0 max-w-[600px] mx-auto px-6 mb-2 mt-4">
-            {indicators.map((indicator, index) => (
-              <div key={index} className="flex items-center">
-                <button
-                  onClick={() => goTo(index)}
-                  className={`text-[15px] font-medium transition-colors cursor-pointer px-4 py-2 rounded-full z-10 ${
-                    activeSlide === index
-                      ? "text-black bg-gray-100"
-                      : "text-gray-400 hover:text-gray-600"
-                  }`}
-                >
-                  {indicator}
-                </button>
-                {index < indicators.length - 1 && (
-                  <div className="w-5 h-[1px] bg-gray-200 -mx-2" />
-                )}
-              </div>
-            ))}
+          <div className="text-center">
+            <p className="anseru-section-tag">How It Works</p>
+            <h2 className="anseru-section-title mt-2 mb-4">
+              How Anseru Turns Knowledge
+              <br />
+              Into Winning Deals
+            </h2>
+            <StepIndicators activeSlide={activeSlide} onGoTo={goTo} />
           </div>
         </div>
-      </div>
 
-      <div className="w-full overflow-hidden">
-        <div
-          ref={scrollContainerRef}
-          className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-8"
-          style={{
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-          }}
-        >
-          {/* Webkit scrollbar hide needs to be in global CSS, but adding class here for clarity */}
-          <div className="flex items-stretch min-w-[max-content]">
+        {/* Sliding content strip */}
+        <div className="absolute left-0 right-0 bottom-0 overflow-hidden" style={{ top: "180px" }}>
+          <motion.div
+            style={{ x: xOffset, width: `${SLIDE_COUNT * 100}vw`, willChange: "transform" }}
+            className="flex h-full"
+          >
             {slideData.map((slide) => (
-              <div
-                key={slide.id}
-                className="w-[100vw] snap-center snap-always flex-shrink-0"
-              >
-                <div className="max-w-[1300px] mx-auto w-full px-4 md:px-6">
-                  <div className="grid md:grid-cols-[2fr_3fr] gap-8 md:gap-12 items-stretch">
-                    {/* ── Left column ──────────────────────────────── */}
-                    <div className="pr-4 flex flex-row h-full py-2 md:py-10">
-                      <div className="hidden md:flex w-[30px] flex-shrink-0 mr-6"></div>
+              <div key={slide.id} className="flex-shrink-0 h-full" style={{ width: "100vw" }}>
+                <div className="max-w-[1300px] mx-auto h-full px-8 xl:px-16">
+                  <div className="grid grid-cols-[5fr_7fr] gap-8 xl:gap-14 h-full py-5">
+
+                    <div className="flex items-center min-h-0">
                       <motion.div
-                        className="flex flex-col flex-grow"
-                        initial={false}
-                        animate={{
-                          opacity: activeSlide === slide.id ? 1 : 0.3,
-                          y: activeSlide === slide.id ? 0 : 20,
-                        }}
-                        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                        className="w-full"
+                        animate={{ opacity: activeSlide === slide.id ? 1 : 0.2, y: activeSlide === slide.id ? 0 : 16 }}
+                        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                       >
-                        <div className="space-y-7 flex-grow">
-                          <div className="space-y-4">
-                            <h2 className="font-normal text-[#111111]">
-                              {slide.title}
-                            </h2>
-                            <p className="anseru-section-description max-w-[95%]">
-                              {slide.description}
-                            </p>
-                          </div>
-
-                          <div className="space-y-4 pt-2">
-                            {slide.bullets.map((text, i) => (
-                              <BulletPoint
-                                key={i}
-                                text={text}
-                                style={slide.bulletStyle}
-                              />
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className="hidden md:flex items-center gap-2 mt-25 w-full md:w-[80%] shrink-0 opacity-0 pointer-events-none translate-y-[10px]">
-                          <div className="h-[3px] w-full" />
-                        </div>
+                        <SlideText slide={slide} />
                       </motion.div>
                     </div>
 
-                    {/* ── Right column – gradient card ─────────────── */}
                     <motion.div
-                      className="pr-4 md:pr-8 h-full flex items-center py-2 md:py-10"
-                      initial={false}
-                      animate={{
-                        opacity: activeSlide === slide.id ? 1 : 0.5,
-                        scale: activeSlide === slide.id ? 1 : 0.95,
-                      }}
-                      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                      className="min-h-0 flex"
+                      animate={{ opacity: activeSlide === slide.id ? 1 : 0.4, scale: activeSlide === slide.id ? 1 : 0.96 }}
+                      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                     >
-                      <div
-                        className={`p-8 md:p-10 pb-0 text-white w-full h-[380px] md:h-[550px] flex flex-col justify-start relative overflow-hidden shadow-lg rounded-[10px] ${slide.gradientClass}`}
-                      >
-                        <img
-                          src={watermark}
-                          alt=""
-                          className="absolute top-0 right-0 w-[40%] h-[40%] object-contain"
-                        />
-
-                        <div
-                          className="absolute inset-0 opacity-100 pointer-events-none"
-                          style={{
-                            backgroundImage: `url(${noiseImage})`,
-                            backgroundSize: "200px 200px",
-                            mixBlendMode: "overlay",
-                          }}
-                        />
-
-                        <div className="relative z-10 space-y-3 mb-10">
-                          <p className="text-[12px] md:text-[14px] font-medium tracking-wide">
-                            {Array.isArray(slide.cardSubtitle) ? (
-                              slide.cardSubtitle.map((item, idx) => (
-                                <span
-                                  key={idx}
-                                  className={
-                                    item.isBold
-                                      ? "font-bold text-white opacity-100"
-                                      : "font-normal opacity-70"
-                                  }
-                                >
-                                  {item.text}
-                                </span>
-                              ))
-                            ) : (
-                              <span className="opacity-90">
-                                {slide.cardSubtitle as string}
-                              </span>
-                            )}
-                          </p>
-                          <h2 className="font-medium max-w-[380px]">
-                            {slide.cardTitle}
-                          </h2>
-                        </div>
-
-                        <div className="absolute z-10 mt-auto rounded-t-lg bottom-0 right-0 flex justify-end">
-                          <img
-                            src={slide.image}
-                            alt={slide.title}
-                            className={`h-auto object-top rounded-lg ${
-                              slide.id >= 2 ? "w-[85%]" : "w-[75%]"
-                            }`}
-                          />
-                        </div>
-                      </div>
+                      <GradientCard slide={slide} className="flex-1 min-h-0" />
                     </motion.div>
+
                   </div>
                 </div>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
+
       </div>
     </div>
   );
+};
+
+/* ══════════════════════════════════════════════════════════════════
+   ROOT export
+══════════════════════════════════════════════════════════════════ */
+export default function Carousel() {
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1023px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  if (isMobile === null) return null;
+  return isMobile ? <MobileCarousel /> : <DesktopCarousel />;
 }
