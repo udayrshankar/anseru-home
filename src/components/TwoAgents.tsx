@@ -126,7 +126,7 @@ export default function TwoAgents() {
       // only work inside section
       if (scrollY < offsetTop || scrollY > offsetTop + totalH - vh) return;
 
-      e.preventDefault(); // 🚨 important
+      e.preventDefault();
 
       const currentIndex = Math.round((scrollY - offsetTop) / vh);
 

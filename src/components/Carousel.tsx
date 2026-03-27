@@ -196,7 +196,7 @@ export default function Carousel() {
 
       const rect = container.getBoundingClientRect();
 
-      // 🔥 VISIBILITY
+      //VISIBILITY
       const visibleHeight =
         Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
 
@@ -208,7 +208,7 @@ export default function Carousel() {
       const scrollingDown = e.deltaY > 0;
       const scrollingUp = e.deltaY < 0;
 
-      // 🔥 WHEN TO LOCK (this is the main fix)
+      // WHEN TO LOCK (this is the main fix)
       const shouldLock =
         visibilityRatio >= 0.99 && rect.top <= navbarHeight + 10;
 
@@ -216,12 +216,12 @@ export default function Carousel() {
         return; // allow normal scroll
       }
 
-      // ✅ LOCK IMMEDIATELY
+      // LOCK IMMEDIATELY
       e.preventDefault();
 
       document.body.style.overflow = "hidden";
 
-      // 🔥 EDGE EXIT (after locking decision)
+      // EDGE EXIT (after locking decision)
       if (
         (currentIndex === 0 && scrollingUp) ||
         (currentIndex === maxIndex && scrollingDown)
